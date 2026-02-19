@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ Панел - Halil Barber</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    </noscript>
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-cut"></i>
+                <h1>Halil Barber</h1>
+                <p>Админ Панел</p>
+            </div>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Потребител</label>
+                    <input type="text" id="username" name="username" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Парола</label>
+                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                </div>
+                <p id="loginError" class="login-error"></p>
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span>Вход</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <i class="fas fa-cut"></i>
+                <span>HalilBarber</span>
+            </div>
+            <nav class="menu">
+                <a href="#" class="active" onclick="switchView('dashboard')"><i class="fas fa-inbox"></i> Резервации</a>
+                <a href="#" onclick="switchView('schedule')"><i class="fas fa-calendar-alt"></i> График</a>
+                <a href="#" onclick="switchView('clients')"><i class="fas fa-crown"></i> Топ Клиенти</a>
+                <a href="#" onclick="switchView('blocked')"><i class="fas fa-ban"></i> Блокирани</a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Изход</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <div style="display: flex; align-items: center;">
+                    <button class="toggle-sidebar" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <!-- Search Bar -->
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Търсене по име, телефон или код..." onkeyup="handleSearch(event)">
+                    </div>
+                </div>
+
+                <div class="user-info">
+                    <div class="notifications" onclick="toggleNotifications(event)">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge" id="pendingCountBadge">0</span>
+                        <div class="notif-dropdown" id="notifDropdown">
+                            <div class="notif-header">
+                                <span>Чакащи заявки</span>
+                                <button class="notif-refresh" onclick="loadNotifications(event)"><i class="fas fa-sync-alt"></i></button>
+                            </div>
+                            <div class="notif-list" id="notifList">
+                                <div class="notif-empty">Зареждане...</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Халил</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div id="view-dashboard" class="dashboard">
+                <div class="page-header">
+                    <h1><i class="fas fa-inbox" style="margin-right: 10px; color: #d4af37;"></i>Резервации</h1>
+                    <button class="btn-primary" onclick="loadAppointments()" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="card stat-card accent-purple">
+                        <div class="stat-header">
+                            <span class="stat-title">Чакащи</span>
+                            <div class="icon-box"><i class="fas fa-clock"></i></div>
+                        </div>
+                        <div class="stat-value" id="statToday">0</div>
+                        <div class="stat-footer">
+                            <span class="trend positive">Нови заявки</span>
+                        </div>
+                    </div>
+                    <div class="card stat-card accent-blue">
+                        <div class="stat-header">
+                            <span class="stat-title">Всички</span>
+                            <div class="icon-box"><i class="fas fa-list"></i></div>
+                        </div>
+                        <div class="stat-value" id="statTotal">0</div>
+                        <div class="stat-footer">
+                            <span class="trend positive">Общо записи</span>
+                        </div>
+                    </div>
+                    <div class="card stat-card accent-green">
+                        <div class="stat-header">
+                            <span class="stat-title">Приходи (Прогноза)</span>
+                            <div class="icon-box"><i class="fas fa-coins"></i></div>
+                        </div>
+                        <div class="stat-value" id="statRevenue">0 <small>лв.</small></div>
+                        <div class="stat-footer">
+                            <span class="period">на база записани часове</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointments Table -->
+                <div class="content-grid">
+                    <div class="card large-card">
+                        <div class="card-header">
+                            <h2>Последни Часове</h2>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="dark-table">
+                                <thead>
+                                    <tr>
+                                        <th>Час</th>
+                                        <th>Клиент</th>
+                                        <th>Услуга</th>
+                                        <th>Код</th>
+                                        <th>Статус</th>
+                                        <th>Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    <tr><td colspan="6" style="text-align:center;">Зареждане...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Content (Hidden by default) -->
+            <div id="view-schedule" class="dashboard" style="display: none;">
+                <div class="page-header">
+                    <h1><i class="fas fa-calendar-alt" style="margin-right: 10px; color: #d4af37;"></i>Дневен График</h1>
+                    <div class="schedule-controls" style="display: flex; gap: 10px; align-items: center;">
+                        <button class="btn-secondary" onclick="changeScheduleDate(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <div class="custom-datepicker" id="customDatepicker">
+                            <input type="hidden" id="scheduleDate">
+                            <button type="button" class="datepicker-trigger" onclick="toggleCalendar(event)">
+                                <i class="fas fa-calendar-alt" style="color: #d4af37;"></i>
+                                <span id="scheduleDateDisplay">--</span>
+                                <i class="fas fa-chevron-down" style="font-size: 10px; opacity: 0.5;"></i>
+                            </button>
+                            <div class="calendar-dropdown" id="calendarDropdown">
+                                <div class="calendar-header">
+                                    <button type="button" class="calendar-nav" onclick="navigateMonth(-1, event)"><i class="fas fa-chevron-left"></i></button>
+                                    <span class="calendar-title" id="calendarTitle"></span>
+                                    <button type="button" class="calendar-nav" onclick="navigateMonth(1, event)"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-weekdays">
+                                    <span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Нд</span>
+                                </div>
+                                <div class="calendar-days" id="calendarDays"></div>
+                                <div class="calendar-footer">
+                                    <button type="button" class="calendar-today-btn" onclick="selectToday(event)">Днес</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-secondary" onclick="changeScheduleDate(1)"><i class="fas fa-chevron-right"></i></button>
+                        <button class="btn-primary" onclick="loadSchedule()" id="refreshScheduleBtn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="schedule-grid" id="scheduleGrid">
+                    <p style="text-align: center; color: #888;">Зареждане...</p>
+                </div>
+            </div>
+
+            <!-- Clients Content (Hidden by default) -->
+            <div id="view-clients" class="dashboard" style="display: none;">
+                <div class="page-header">
+                    <h1><i class="fas fa-crown" style="margin-right: 10px; color: #d4af37;"></i>Топ Клиенти</h1>
+                    <button class="btn-primary" onclick="loadClients()" id="refreshClientsBtn"><i class="fas fa-sync-alt"></i></button>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card large-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-trophy" style="margin-right: 8px; color: #ffd700;"></i>Лоялни Клиенти</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="dark-table">
+                                <thead>
+                                    <tr>
+                                        <th>Ранг</th>
+                                        <th>Име</th>
+                                        <th>Телефон</th>
+                                        <th>Посещения</th>
+                                        <th>Общо похарчени</th>
+                                        <th>Последно</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="clientsTableBody">
+                                    <tr><td colspan="6" style="text-align:center;">Зареждане...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Blocked Phones Content (Hidden by default) -->
+            <div id="view-blocked" class="dashboard" style="display: none;">
+                <div class="page-header">
+                    <h1><i class="fas fa-ban" style="margin-right: 10px; color: #FF3D71;"></i>Блокирани Телефони</h1>
+                    <button class="btn-primary" onclick="loadBlockedPhones()" id="refreshBlockedBtn"><i class="fas fa-sync-alt"></i></button>
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <div class="card" style="padding: 20px;">
+                        <h3 style="margin: 0 0 15px; color: #FF3D71;"><i class="fas fa-plus-circle" style="margin-right: 8px;"></i>Добави телефон</h3>
+                        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                            <input type="tel" id="blockPhoneInput" placeholder="0888123456" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-family: monospace; width: 180px;">
+                            <input type="text" id="blockReasonInput" placeholder="Причина (незадължително)" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 14px; flex: 1; min-width: 150px;">
+                            <button class="action-btn-lg btn-reject" onclick="addBlockedPhone()" style="white-space: nowrap;"><i class="fas fa-ban"></i> Блокирай</button>
+                        </div>
+                        <small id="blockPhoneError" style="color: #FF3D71; display: none; margin-top: 8px;">Невалиден телефон (напр. 0888123456)</small>
+                    </div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="card large-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-phone-slash" style="margin-right: 8px; color: #FF3D71;"></i>Списък с блокирани номера</h2>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="dark-table">
+                                <thead>
+                                    <tr>
+                                        <th>Телефон</th>
+                                        <th>Причина</th>
+                                        <th>Блокиран на</th>
+                                        <th>Действие</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="blockedTableBody">
+                                    <tr><td colspan="4" style="text-align:center;">Зареждане...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        /* Login Modal Styles */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .login-container {
+            background: rgba(30, 30, 50, 0.95);
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header i {
+            font-size: 48px;
+            color: #d4af37;
+            margin-bottom: 15px;
+        }
+
+        .login-header h1 {
+            color: #fff;
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .login-header p {
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .login-modal .form-group {
+            margin-bottom: 20px;
+        }
+
+        .login-modal label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .login-modal input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        .login-modal input:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #d4af37, #b8962e);
+            border: none;
+            border-radius: 10px;
+            color: #1a1a2e;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-error {
+            color: #ff4444;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+
+        /* Profile Avatar */
+        .profile-avatar {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #d4af37, #b8962e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a2e;
+            font-size: 14px;
+        }
+
+        /* Table Styles */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dark-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 4px;
+            color: var(--text-secondary);
+            min-width: 700px;
+        }
+        .dark-table th {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 2px solid #444;
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .dark-table td {
+            padding: 14px 15px;
+            vertical-align: middle;
+            font-size: 14px;
+            background: rgba(255,255,255, 0.02);
+        }
+        .dark-table tr td:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+        .dark-table tr td:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+        .dark-table tbody tr {
+            transition: background 0.2s;
+        }
+        .dark-table tbody tr:hover td {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .client-name {
+            color: #fff;
+            font-weight: 600;
+            display: block;
+            font-size: 15px;
+        }
+        .client-phone {
+            font-size: 12px;
+            color: #999;
+            font-family: monospace;
+        }
+
+        .confirmation-code {
+            font-family: monospace;
+            font-size: 12px;
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .badge-status {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-pending { background: rgba(255, 171, 0, 0.2); color: #FFCC00; border: 1px solid rgba(255, 171, 0, 0.3); }
+        .badge-confirmed { background: rgba(0, 214, 143, 0.2); color: #00E89F; border: 1px solid rgba(0, 214, 143, 0.3); }
+        .badge-rejected { background: rgba(255, 61, 113, 0.2); color: #FF5E82; border: 1px solid rgba(255, 61, 113, 0.3); }
+
+        .action-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn-lg {
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .action-btn-lg:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-confirm { background: rgba(0, 214, 143, 0.2); color: #00D68F; }
+        .btn-confirm:hover:not(:disabled) { background: #00D68F; color: white; }
+
+        .btn-reject { background: rgba(255, 61, 113, 0.2); color: #FF3D71; }
+        .btn-reject:hover:not(:disabled) { background: #FF3D71; color: white; }
+
+        .btn-edit { background: none; color: #d4af37; font-size: 14px; padding: 0; width: auto; height: auto; margin-left: 5px; cursor: pointer; border: none; }
+        .btn-edit:hover { color: white; }
+
+        .btn-block { background: rgba(255, 61, 113, 0.15); color: #FF3D71; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: 600; transition: all 0.2s; }
+        .btn-block:hover { background: #FF3D71; color: white; }
+        .btn-unblock { background: rgba(0, 214, 143, 0.15); color: #00D68F; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: 600; transition: all 0.2s; }
+        .btn-unblock:hover { background: #00D68F; color: white; }
+        .blocked-badge { font-size: 10px; color: #FF3D71; margin-left: 5px; }
+
+        /* Notifications Dropdown */
+        .notif-dropdown {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: -10px;
+            width: 340px;
+            max-height: 420px;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            z-index: 200;
+            overflow: hidden;
+        }
+        .notif-dropdown.open { display: block; }
+        .notif-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            font-size: 14px;
+            color: #d4af37;
+        }
+        .notif-refresh {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+        .notif-refresh:hover { color: #d4af37; }
+        .notif-list {
+            overflow-y: auto;
+            max-height: 360px;
+        }
+        .notif-item {
+            display: flex;
+            gap: 10px;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: background 0.15s;
+            cursor: default;
+        }
+        .notif-item:hover { background: rgba(255,255,255,0.03); }
+        .notif-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .notif-icon.pending { background: rgba(255,171,0,0.15); color: #FFCC00; }
+        .notif-icon.confirmed { background: rgba(0,214,143,0.15); color: #00D68F; }
+        .notif-icon.rejected { background: rgba(255,61,113,0.15); color: #FF5E82; }
+        .notif-body { flex: 1; min-width: 0; }
+        .notif-text {
+            font-size: 13px;
+            color: var(--text-main);
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .notif-time {
+            font-size: 11px;
+            color: #666;
+            margin-top: 3px;
+        }
+        .notif-empty {
+            text-align: center;
+            color: #666;
+            padding: 30px 16px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .notif-dropdown {
+                width: 290px;
+                right: -60px;
+            }
+        }
+
+        /* Overlay for mobile sidebar */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 900;
+        }
+        .sidebar-overlay.active { display: block; }
+
+        /* Loading spinner */
+        .btn-primary.loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Schedule Grid */
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        .schedule-slot {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+
+        .schedule-slot:hover {
+            border-color: #d4af37;
+        }
+
+        .schedule-slot.free {
+            opacity: 0.5;
+            border-style: dashed;
+        }
+
+        .schedule-slot.booked {
+            border-left: 4px solid #00D68F;
+        }
+
+        .schedule-slot.pending {
+            border-left: 4px solid #FFAB00;
+        }
+
+        .slot-time {
+            font-size: 24px;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 10px;
+        }
+
+        .slot-client {
+            font-size: 14px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .slot-service {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .slot-phone {
+            font-size: 11px;
+            color: #888;
+            font-family: monospace;
+            margin-top: 5px;
+        }
+
+        .slot-status {
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+        /* Schedule controls responsive */
+        .schedule-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile overrides for inline styles */
+        @media (max-width: 768px) {
+            .schedule-grid {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 10px;
+                padding: 10px 0;
+            }
+
+            .schedule-slot {
+                padding: 12px;
+            }
+
+            .slot-time {
+                font-size: 20px;
+                margin-bottom: 6px;
+            }
+
+            .slot-client {
+                font-size: 13px;
+            }
+
+            .slot-service {
+                font-size: 11px;
+            }
+
+            .schedule-controls {
+                width: 100%;
+            }
+
+            .custom-datepicker {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .login-container {
+                margin: 15px;
+                padding: 25px;
+            }
+
+            .login-header i {
+                font-size: 36px;
+            }
+
+            .login-header h1 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .schedule-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* Custom Datepicker */
+        .custom-datepicker {
+            position: relative;
+        }
+
+        .datepicker-trigger {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .datepicker-trigger:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+
+        .calendar-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--sidebar-bg, #1e1e32);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            z-index: 300;
+            width: 280px;
+        }
+
+        .calendar-dropdown.open {
+            display: block;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .calendar-title {
+            font-weight: 600;
+            color: #d4af37;
+            font-size: 15px;
+        }
+
+        .calendar-nav {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 12px;
+        }
+
+        .calendar-nav:hover {
+            border-color: #d4af37;
+            color: #d4af37;
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 4px;
+        }
+
+        .calendar-weekdays span {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 0;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .calendar-day {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--text-main);
+            transition: all 0.15s;
+            margin: auto;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .calendar-day:hover {
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+        }
+
+        .calendar-day.today {
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            color: #d4af37;
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #d4af37, #b8962e);
+            color: #1a1a2e;
+            font-weight: 700;
+        }
+
+        .calendar-day.selected.today {
+            border-color: transparent;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.25;
+        }
+
+        .calendar-footer {
+            margin-top: 10px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 10px;
+        }
+
+        .calendar-today-btn {
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 6px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .calendar-today-btn:hover {
+            background: #d4af37;
+            color: #1a1a2e;
+        }
+
+        @media (max-width: 768px) {
+            .calendar-dropdown {
+                position: fixed;
+                left: 50%;
+                right: auto;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 400;
+            }
+
+            .datepicker-trigger {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <!-- Overlay div -->
+    <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <script>
+        let searchTimeout = null;
+
+        // Custom Calendar
+        const BG_MONTHS = ['Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни', 'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'];
+        let calendarViewDate = new Date();
+
+        function formatLocalDate(d) {
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        }
+
+        function toggleCalendar(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('calendarDropdown');
+            const isOpen = dropdown.classList.contains('open');
+            if (!isOpen) {
+                const currentVal = document.getElementById('scheduleDate').value;
+                if (currentVal) {
+                    calendarViewDate = new Date(currentVal + 'T00:00:00');
+                } else {
+                    calendarViewDate = new Date();
+                }
+                renderCalendar();
+            }
+            dropdown.classList.toggle('open');
+        }
+
+        function renderCalendar() {
+            const year = calendarViewDate.getFullYear();
+            const month = calendarViewDate.getMonth();
+            const selectedVal = document.getElementById('scheduleDate').value;
+            const today = new Date();
+            const todayStr = formatLocalDate(today);
+
+            document.getElementById('calendarTitle').textContent = `${BG_MONTHS[month]} ${year}`;
+
+            const container = document.getElementById('calendarDays');
+            container.innerHTML = '';
+
+            // First day of month (0=Sun, adjust to Mon=0)
+            const firstDay = new Date(year, month, 1);
+            let startDay = firstDay.getDay() - 1;
+            if (startDay < 0) startDay = 6; // Sunday becomes 6
+
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            // Previous month days
+            for (let i = startDay - 1; i >= 0; i--) {
+                const day = daysInPrevMonth - i;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'calendar-day other-month';
+                btn.textContent = day;
+                const prevMonth = month === 0 ? 11 : month - 1;
+                const prevYear = month === 0 ? year - 1 : year;
+                const dateStr = `${prevYear}-${String(prevMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                btn.onclick = (e) => { e.stopPropagation(); selectCalendarDate(dateStr); };
+                container.appendChild(btn);
+            }
+
+            // Current month days
+            for (let d = 1; d <= daysInMonth; d++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'calendar-day';
+                btn.textContent = d;
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                if (dateStr === todayStr) btn.classList.add('today');
+                if (dateStr === selectedVal) btn.classList.add('selected');
+                btn.onclick = (e) => { e.stopPropagation(); selectCalendarDate(dateStr); };
+                container.appendChild(btn);
+            }
+
+            // Next month days to fill grid
+            const totalCells = container.children.length;
+            const remaining = (7 - (totalCells % 7)) % 7;
+            for (let d = 1; d <= remaining; d++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'calendar-day other-month';
+                btn.textContent = d;
+                const nextMonth = month === 11 ? 0 : month + 1;
+                const nextYear = month === 11 ? year + 1 : year;
+                const dateStr = `${nextYear}-${String(nextMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+                btn.onclick = (e) => { e.stopPropagation(); selectCalendarDate(dateStr); };
+                container.appendChild(btn);
+            }
+        }
+
+        function selectCalendarDate(dateStr) {
+            document.getElementById('scheduleDate').value = dateStr;
+            updateDateDisplay();
+            document.getElementById('calendarDropdown').classList.remove('open');
+            loadSchedule();
+        }
+
+        function navigateMonth(dir, e) {
+            e.stopPropagation();
+            calendarViewDate.setMonth(calendarViewDate.getMonth() + dir);
+            renderCalendar();
+        }
+
+        function selectToday(e) {
+            e.stopPropagation();
+            selectCalendarDate(formatLocalDate(new Date()));
+        }
+
+        function updateDateDisplay() {
+            const val = document.getElementById('scheduleDate').value;
+            if (!val) {
+                document.getElementById('scheduleDateDisplay').textContent = '--';
+                return;
+            }
+            const d = new Date(val + 'T00:00:00');
+            const day = d.getDate();
+            const month = BG_MONTHS[d.getMonth()];
+            const year = d.getFullYear();
+            document.getElementById('scheduleDateDisplay').textContent = `${day} ${month} ${year}`;
+        }
+
+        // Close calendar on outside click
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('calendarDropdown');
+            if (dropdown && !e.target.closest('.custom-datepicker')) {
+                dropdown.classList.remove('open');
+            }
+        });
+
+        // Check authentication on load
+        async function checkAuth() {
+            try {
+                const res = await fetch('/api/admin/check-auth', { credentials: 'include' });
+                const data = await res.json();
+
+                if (data.authenticated) {
+                    showDashboard();
+                } else {
+                    showLogin();
+                }
+            } catch (e) {
+                console.error('Auth check failed:', e);
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('loginModal').style.display = 'flex';
+            document.getElementById('mainContainer').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('mainContainer').style.display = 'flex';
+            loadAppointments();
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorEl = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>Влизане...</span>';
+            errorEl.textContent = '';
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    showDashboard();
+                } else {
+                    errorEl.textContent = data.error || 'Грешни данни за вход';
+                }
+            } catch (e) {
+                errorEl.textContent = 'Грешка при свързване със сървъра';
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<span>Вход</span><i class="fas fa-arrow-right"></i>';
+        }
+
+        async function handleLogout() {
+            try {
+                await fetch('/api/admin/logout', {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+            } catch (e) {
+                console.error('Logout error:', e);
+            }
+            showLogin();
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Search functionality
+        function handleSearch(event) {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                loadAppointments();
+            }, 300);
+        }
+
+        // Auto-refresh interval (30 seconds)
+        setInterval(() => {
+            if(document.getElementById('view-dashboard').style.display !== 'none' &&
+               document.getElementById('mainContainer').style.display !== 'none') {
+                loadAppointments();
+            }
+        }, 30000);
+
+        // Sidebar Toggle
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function switchView(viewName) {
+            document.getElementById('view-dashboard').style.display = 'none';
+            document.getElementById('view-schedule').style.display = 'none';
+            document.getElementById('view-clients').style.display = 'none';
+            document.getElementById('view-blocked').style.display = 'none';
+            document.querySelectorAll('.menu a').forEach(el => el.classList.remove('active'));
+
+            if (viewName === 'dashboard') {
+                document.getElementById('view-dashboard').style.display = 'block';
+                document.querySelector('.menu a:nth-child(1)').classList.add('active');
+                loadAppointments();
+            } else if (viewName === 'schedule') {
+                document.getElementById('view-schedule').style.display = 'block';
+                document.querySelector('.menu a:nth-child(2)').classList.add('active');
+                document.getElementById('scheduleDate').value = formatLocalDate(new Date());
+                updateDateDisplay();
+                loadSchedule();
+            } else if (viewName === 'clients') {
+                document.getElementById('view-clients').style.display = 'block';
+                document.querySelector('.menu a:nth-child(3)').classList.add('active');
+                loadClients();
+            } else if (viewName === 'blocked') {
+                document.getElementById('view-blocked').style.display = 'block';
+                document.querySelector('.menu a:nth-child(4)').classList.add('active');
+                loadBlockedPhones();
+            }
+
+            if(window.innerWidth <= 768) toggleSidebar();
+        }
+
+        // Schedule functions
+        const WORK_HOURS = [
+            "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+            "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
+        ];
+
+        function changeScheduleDate(days) {
+            const dateInput = document.getElementById('scheduleDate');
+            const currentDate = new Date(dateInput.value + 'T00:00:00');
+            currentDate.setDate(currentDate.getDate() + days);
+            dateInput.value = formatLocalDate(currentDate);
+            updateDateDisplay();
+            loadSchedule();
+        }
+
+        async function loadSchedule() {
+            const date = document.getElementById('scheduleDate').value;
+            const grid = document.getElementById('scheduleGrid');
+            const refreshBtn = document.getElementById('refreshScheduleBtn');
+            if (refreshBtn) refreshBtn.classList.add('loading');
+
+            if (!date) {
+                grid.innerHTML = '<p style="text-align: center; color: #888;">Изберете дата</p>';
+                if (refreshBtn) refreshBtn.classList.remove('loading');
+                return;
+            }
+
+            grid.innerHTML = '<p style="text-align: center; color: #888;">Зареждане...</p>';
+
+            try {
+                // Use dedicated schedule endpoint
+                const apptRes = await fetch(`/api/admin/schedule?date=${date}`, { credentials: 'include' });
+
+                if (apptRes.status === 401) {
+                    showLogin();
+                    return;
+                }
+
+                const appointments = await apptRes.json();
+                const apptMap = {};
+                appointments.forEach(app => {
+                    apptMap[app.time] = app;
+                });
+
+                grid.innerHTML = '';
+
+                WORK_HOURS.forEach(time => {
+                    const slot = document.createElement('div');
+                    const appt = apptMap[time];
+
+                    if (appt) {
+                        const statusClass = appt.status === 'confirmed' ? 'booked' : 'pending';
+                        const statusBadge = appt.status === 'confirmed'
+                            ? '<span class="badge-status badge-confirmed">Потвърден</span>'
+                            : '<span class="badge-status badge-pending">Чака</span>';
+
+                        slot.className = `schedule-slot ${statusClass}`;
+                        slot.innerHTML = `
+                            <div class="slot-time">${time}</div>
+                            <div class="slot-client">${escapeHtml(appt.clientName)}</div>
+                            <div class="slot-service">${escapeHtml(appt.service)}</div>
+                            <div class="slot-phone">${escapeHtml(appt.clientPhone)}</div>
+                            <div class="slot-status">${statusBadge}</div>
+                        `;
+                    } else {
+                        slot.className = 'schedule-slot free';
+                        slot.innerHTML = `
+                            <div class="slot-time">${time}</div>
+                            <div class="slot-client" style="color: #555;">Свободен</div>
+                        `;
+                    }
+
+                    grid.appendChild(slot);
+                });
+
+            } catch (e) {
+                console.error(e);
+                grid.innerHTML = '<p style="text-align: center; color: red;">Грешка при зареждане</p>';
+            }
+
+            if (refreshBtn) refreshBtn.classList.remove('loading');
+        }
+
+        async function loadClients() {
+            const refreshBtn = document.getElementById('refreshClientsBtn');
+            if (refreshBtn) refreshBtn.classList.add('loading');
+
+            try {
+                const res = await fetch('/api/admin/clients', { credentials: 'include' });
+
+                if (res.status === 401) {
+                    showLogin();
+                    return;
+                }
+
+                const data = await res.json();
+                const tbody = document.getElementById('clientsTableBody');
+                tbody.innerHTML = "";
+
+                if(data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Няма данни.</td></tr>';
+                    return;
+                }
+
+                data.forEach((client, index) => {
+                    let rankIcon = '';
+                    if(index === 0) rankIcon = '🥇';
+                    else if(index === 1) rankIcon = '🥈';
+                    else if(index === 2) rankIcon = '🥉';
+                    else rankIcon = `#${index + 1}`;
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td data-label="Ранг" style="font-weight:bold; color: #d4af37;">${rankIcon}</td>
+                        <td data-label="Име">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="client-name">${escapeHtml(client.name)}</span>
+                                <button class="btn-edit" onclick="editClientName('${escapeHtml(client.phone)}', '${escapeHtml(client.name).replace(/'/g, "\\'")}')"><i class="fas fa-pen"></i></button>
+                            </div>
+                        </td>
+                        <td data-label="Телефон" style="font-family: monospace;">${escapeHtml(client.phone)}</td>
+                        <td data-label="Посещения"><span class="badge-status badge-confirmed" style="font-size: 14px;">${client.visits}</span></td>
+                        <td data-label="Похарчени" style="font-weight: bold; color: #00D68F;">${client.totalSpent} лв.</td>
+                        <td data-label="Последно" style="font-size: 12px; color: #777;">${client.lastVisit}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+            } catch(e) {
+                console.error(e);
+                document.getElementById('clientsTableBody').innerHTML = '<tr><td colspan="6" style="text-align:center; color: red;">Грешка!</td></tr>';
+            }
+
+            if (refreshBtn) refreshBtn.classList.remove('loading');
+        }
+
+        async function loadAppointments() {
+            const refreshBtn = document.getElementById('refreshBtn');
+            if (refreshBtn) {
+                refreshBtn.classList.add('loading');
+            }
+
+            try {
+                const searchTerm = document.getElementById('searchInput')?.value || '';
+                const url = searchTerm
+                    ? `/api/admin/appointments?search=${encodeURIComponent(searchTerm)}`
+                    : '/api/admin/appointments';
+
+                const res = await fetch(url, { credentials: 'include' });
+
+                if (res.status === 401) {
+                    showLogin();
+                    return;
+                }
+
+                const data = await res.json();
+
+                const tbody = document.getElementById('tableBody');
+                tbody.innerHTML = "";
+
+                let pending = 0;
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Няма резултати.</td></tr>';
+                } else {
+                    data.forEach(app => {
+                        if(app.status === 'pending') pending++;
+
+                        const row = document.createElement('tr');
+
+                        let actions = "";
+                        if (app.status === 'pending') {
+                            actions = `
+                                <div class="action-container">
+                                    <button class="action-btn-lg btn-confirm" onclick="updateStatus(${app.id}, 'confirm', this)"><i class="fas fa-check"></i> Потвърди</button>
+                                    <button class="action-btn-lg btn-reject" onclick="updateStatus(${app.id}, 'reject', this)"><i class="fas fa-times"></i> Откажи</button>
+                                </div>
+                            `;
+                        } else if (app.status === 'confirmed') {
+                            actions = `
+                                <div class="action-container">
+                                    <button class="action-btn-lg btn-reject" onclick="updateStatus(${app.id}, 'reject', this)"><i class="fas fa-times"></i> Откажи</button>
+                                </div>
+                            `;
+                        } else {
+                            actions = `<span style="color: #555; font-size: 12px;">Отказан</span>`;
+                        }
+
+                        let statusClass = 'badge-pending';
+                        let statusText = 'Чака';
+                        if(app.status === 'confirmed') { statusClass = 'badge-confirmed'; statusText = 'Приет'; }
+                        if(app.status === 'rejected') { statusClass = 'badge-rejected'; statusText = 'Отказан'; }
+
+                        const confirmCode = app.confirmationCode || '-';
+
+                        row.innerHTML = `
+                            <td data-label="Час">
+                                <div style="color: var(--text-main); font-weight: 600;">${escapeHtml(app.time)}</div>
+                                <div style="font-size: 11px; opacity: 0.7;">${escapeHtml(app.date)}</div>
+                            </td>
+                            <td data-label="Клиент">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div>
+                                        <span class="client-name">${escapeHtml(app.clientName)}</span>
+                                        <span class="client-phone">${escapeHtml(app.clientPhone)}</span>
+                                    </div>
+                                    <button class="btn-edit" onclick="editName(${app.id}, '${escapeHtml(app.clientName).replace(/'/g, "\\'")}')"><i class="fas fa-pen"></i></button>
+                                </div>
+                            </td>
+                            <td data-label="Услуга" style="font-size: 13px;">${escapeHtml(app.service)}</td>
+                            <td data-label="Код"><span class="confirmation-code">${escapeHtml(confirmCode)}</span></td>
+                            <td data-label="Статус"><span class="badge-status ${statusClass}">${statusText}</span></td>
+                            <td data-label="">${actions}</td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                }
+
+                document.getElementById('pendingCountBadge').innerText = pending;
+                document.getElementById('statToday').innerText = pending;
+                document.getElementById('statTotal').innerText = data.length;
+
+                // Load Stats (Revenue)
+                const statRes = await fetch('/api/admin/stats', { credentials: 'include' });
+                if (statRes.ok) {
+                    const statData = await statRes.json();
+                    document.getElementById('statRevenue').innerHTML = `${statData.revenue || 0} <small>лв.</small>`;
+                }
+
+            } catch (e) {
+                console.error(e);
+            }
+
+            if (refreshBtn) {
+                refreshBtn.classList.remove('loading');
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function editName(id, oldName) {
+            const newName = prompt("Промяна на име:", oldName);
+            if (newName && newName !== oldName) {
+                const res = await fetch('/api/admin/edit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ id, clientName: newName })
+                });
+
+                if (res.status === 401) {
+                    showLogin();
+                    return;
+                }
+
+                loadAppointments();
+            }
+        }
+
+        async function editClientName(phone, oldName) {
+            const newName = prompt("Промяна на име на клиент:", oldName);
+            if (newName && newName !== oldName) {
+                const res = await fetch('/api/admin/edit-client', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ phone, clientName: newName })
+                });
+
+                if (res.status === 401) {
+                    showLogin();
+                    return;
+                }
+
+                loadClients();
+                loadAppointments();
+            }
+        }
+
+        async function updateStatus(id, action, btn) {
+            if (!confirm("Сигурен ли си?")) return;
+
+            if (btn) btn.disabled = true;
+
+            const res = await fetch('/api/admin/action', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ id, action })
+            });
+
+            if (res.status === 401) {
+                showLogin();
+                return;
+            }
+
+            loadAppointments();
+        }
+
+        // Notifications
+        function toggleNotifications(e) {
+            e.stopPropagation();
+            // Don't toggle if clicking inside the dropdown itself
+            if (e.target.closest('.notif-dropdown')) return;
+            const dropdown = document.getElementById('notifDropdown');
+            const isOpen = dropdown.classList.contains('open');
+            dropdown.classList.toggle('open');
+            if (!isOpen) loadNotifications();
+        }
+
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('notifDropdown');
+            if (dropdown && !e.target.closest('.notifications')) {
+                dropdown.classList.remove('open');
+            }
+        });
+
+        async function loadNotifications(e) {
+            if (e) e.stopPropagation();
+            const list = document.getElementById('notifList');
+            list.innerHTML = '<div class="notif-empty">Зареждане...</div>';
+
+            try {
+                const res = await fetch('/api/admin/notifications', { credentials: 'include' });
+                if (res.status === 401) return;
+                const data = await res.json();
+
+                if (data.length === 0) {
+                    list.innerHTML = '<div class="notif-empty">Няма чакащи заявки</div>';
+                    return;
+                }
+
+                list.innerHTML = '';
+                data.forEach(n => {
+                    const timeAgo = formatTimeAgo(n.createdAt);
+                    const item = document.createElement('div');
+                    item.className = 'notif-item';
+                    item.innerHTML = `
+                        <div class="notif-icon pending"><i class="fas fa-clock"></i></div>
+                        <div class="notif-body">
+                            <div class="notif-text"><b>${escapeHtml(n.clientName)}</b> - ${escapeHtml(n.service)}</div>
+                            <div class="notif-time">${escapeHtml(n.date)} ${escapeHtml(n.time)} &bull; ${timeAgo}</div>
+                        </div>
+                    `;
+                    list.appendChild(item);
+                });
+            } catch (e) {
+                list.innerHTML = '<div class="notif-empty">Грешка при зареждане</div>';
+            }
+        }
+
+        function formatTimeAgo(dateStr) {
+            if (!dateStr) return '';
+            const now = new Date();
+            const date = new Date(dateStr);
+            const diffMs = now - date;
+            const diffMin = Math.floor(diffMs / 60000);
+
+            if (diffMin < 1) return 'сега';
+            if (diffMin < 60) return `преди ${diffMin} мин`;
+            const diffHrs = Math.floor(diffMin / 60);
+            if (diffHrs < 24) return `преди ${diffHrs} ч`;
+            const diffDays = Math.floor(diffHrs / 24);
+            if (diffDays === 1) return 'вчера';
+            return `преди ${diffDays} дни`;
+        }
+
+        // Block/Unblock phone functions
+        async function blockPhone(phone, reasonArg) {
+            let reason = reasonArg;
+            if (reason === undefined) {
+                reason = prompt("Причина за блокиране (незадължително):");
+                if (reason === null) return; // cancelled
+            }
+
+            try {
+                const res = await fetch('/api/admin/block-phone', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ phone, reason: reason || null })
+                });
+
+                if (res.status === 401) { showLogin(); return; }
+
+                if (res.ok) {
+                    loadAppointments();
+                    if (document.getElementById('view-blocked').style.display !== 'none') {
+                        loadBlockedPhones();
+                    }
+                }
+            } catch (e) {
+                console.error('Block phone error:', e);
+            }
+        }
+
+        async function unblockPhone(phone) {
+            if (!confirm("Сигурен ли си, че искаш да отблокираш " + phone + "?")) return;
+
+            try {
+                const res = await fetch('/api/admin/unblock-phone', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ phone })
+                });
+
+                if (res.status === 401) { showLogin(); return; }
+
+                if (res.ok) {
+                    loadAppointments();
+                    if (document.getElementById('view-blocked').style.display !== 'none') {
+                        loadBlockedPhones();
+                    }
+                }
+            } catch (e) {
+                console.error('Unblock phone error:', e);
+            }
+        }
+
+        async function addBlockedPhone() {
+            const phoneInput = document.getElementById('blockPhoneInput');
+            const reasonInput = document.getElementById('blockReasonInput');
+            const errorEl = document.getElementById('blockPhoneError');
+            const phone = phoneInput.value.trim();
+
+            const phoneRegex = /^(\+359|0)8[7-9][0-9]{7}$/;
+            const cleanPhone = phone.replace(/[^0-9+]/g, '');
+
+            if (!phoneRegex.test(cleanPhone)) {
+                errorEl.style.display = 'block';
+                phoneInput.style.borderColor = '#FF3D71';
+                return;
+            }
+
+            errorEl.style.display = 'none';
+            phoneInput.style.borderColor = 'var(--border-color)';
+
+            await blockPhone(cleanPhone, reasonInput.value.trim() || null);
+            phoneInput.value = '';
+            reasonInput.value = '';
+            loadBlockedPhones();
+        }
+
+        async function loadBlockedPhones() {
+            const refreshBtn = document.getElementById('refreshBlockedBtn');
+            if (refreshBtn) refreshBtn.classList.add('loading');
+
+            try {
+                const res = await fetch('/api/admin/blocked-phones', { credentials: 'include' });
+
+                if (res.status === 401) { showLogin(); return; }
+
+                const data = await res.json();
+                const tbody = document.getElementById('blockedTableBody');
+                tbody.innerHTML = "";
+
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">Няма блокирани номера.</td></tr>';
+                } else {
+                    data.forEach(item => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td data-label="Телефон" style="font-family: monospace; font-weight: 600; color: #fff;">${escapeHtml(item.phone)}</td>
+                            <td data-label="Причина" style="font-size: 13px;">${item.reason ? escapeHtml(item.reason) : '<span style="color: #555;">-</span>'}</td>
+                            <td data-label="Блокиран на" style="font-size: 12px; color: #777;">${item.blockedAt || '-'}</td>
+                            <td data-label="Действие">
+                                <button class="btn-unblock" onclick="unblockPhone('${escapeHtml(item.phone)}')"><i class="fas fa-unlock"></i> Отблокирай</button>
+                            </td>
+                        `;
+                        tbody.appendChild(row);
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+                document.getElementById('blockedTableBody').innerHTML = '<tr><td colspan="4" style="text-align:center; color: red;">Грешка!</td></tr>';
+            }
+
+            if (refreshBtn) refreshBtn.classList.remove('loading');
+        }
+
+        // Initialize
+        checkAuth();
+    </script>
+</body>
+</html>

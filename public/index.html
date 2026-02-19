@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbershop Halil - Пловдив</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Най-доброто подстригване и оформяне на брада в Пловдив. Barbershop Halil - класическо бръснене, модерно подстригване. Запази час онлайн!">
+    <meta name="keywords" content="бръснарница, подстригване, Пловдив, барбершоп, брада, мъжко подстригване, Халил">
+    <meta name="author" content="Barbershop Halil">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Barbershop Halil - Най-доброто подстригване в Пловдив">
+    <meta property="og:description" content="Класическо бръснене, модерно подстригване и оформяне на брада. Запази час онлайн сега!">
+    <meta property="og:image" content="/bg.png">
+    <meta property="og:url" content="https://halilbarber.com">
+    <meta property="og:site_name" content="Barbershop Halil">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Barbershop Halil - Пловдив">
+    <meta name="twitter:description" content="Класическо бръснене и модерно подстригване в сърцето на Пловдив.">
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#d4af37">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap"></noscript>
+
+    <!-- Critical CSS first -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Non-critical: Font Awesome + AOS (deferred) -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" as="style" href="https://unpkg.com/aos@2.3.1/dist/aos.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    </noscript>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header data-aos="fade-down">
+        <div class="logo">HALIL BARBER</div>
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav>
+            <ul id="navLinks">
+                <li><a href="#home" onclick="closeMobileMenu()">НАЧАЛО</a></li>
+                <li><a href="#services" onclick="closeMobileMenu()">УСЛУГИ</a></li>
+                <li><a href="#info" onclick="closeMobileMenu()">ИНФО</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <img src="bg.png" alt="Barbershop Halil Logo" class="hero-logo" data-aos="zoom-in">
+        <h1 data-aos="zoom-in" data-aos-delay="200">Стилът, който <span>заслужаваш</span></h1>
+        <p data-aos="fade-up" data-aos-delay="400">Класическо бръснене и модерно подстригване в сърцето на Пловдив.</p>
+        <a href="#services" class="btn" data-aos="fade-up" data-aos-delay="600">Запази Час</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="services-header" data-aos="fade-up">
+            <span class="section-label"><i class="fas fa-cut"></i> Какво предлагаме</span>
+            <h2 class="section-title">Нашите Услуги</h2>
+            <div class="title-decoration">
+                <span class="line"></span>
+                <span class="scissors">✂</span>
+                <span class="line"></span>
+            </div>
+        </div>
+        <div class="service-grid">
+            <div class="service-card" data-aos="fade-up" onclick="selectService('Мъжко Подстригване', 25)">
+                <div class="service-icon"><i class="fas fa-cut"></i></div>
+                <h3>Мъжко Подстригване</h3>
+                <p>Класическо или модерно, с внимание към детайла.</p>
+                <div class="service-footer">
+                    <span class="price">25 лв.</span>
+                    <button class="book-btn">Запази</button>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="100" onclick="selectService('Оформяне на Брада', 15)">
+                <div class="service-icon"><i class="fas fa-user"></i></div>
+                <h3>Оформяне на Брада</h3>
+                <p>Подстригване, контуриране и терапия с топли кърпи.</p>
+                <div class="service-footer">
+                    <span class="price">15 лв.</span>
+                    <button class="book-btn">Запази</button>
+                </div>
+            </div>
+            <div class="service-card featured" data-aos="fade-up" data-aos-delay="200" onclick="selectService('Пълен Пакет', 35)">
+                <div class="featured-badge"><i class="fas fa-star"></i> Препоръчано</div>
+                <div class="service-icon"><i class="fas fa-crown"></i></div>
+                <h3>Пълен Пакет</h3>
+                <p>Подстригване + Брада + Измиване и стайлинг.</p>
+                <div class="service-footer">
+                    <span class="price">35 лв.</span>
+                    <button class="book-btn">Запази</button>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300" onclick="selectService('Детско Подстригване', 20)">
+                <div class="service-icon"><i class="fas fa-child"></i></div>
+                <h3>Детско Подстригване</h3>
+                <p>За малките джентълмени (до 12г).</p>
+                <div class="service-footer">
+                    <span class="price">20 лв.</span>
+                    <button class="book-btn">Запази</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Запази час</h2>
+            <p id="serviceTitle">Избрана услуга: <span id="selectedService"></span></p>
+
+            <div class="booking-container">
+                <div class="form-group">
+                    <label>Избери Дата:</label>
+                    <div id="dateScroller" class="date-scroller">
+                        <!-- Dates injected by JS -->
+                    </div>
+                    <input type="hidden" id="datePicker">
+                </div>
+
+                <div id="slotsGrid" class="slots-grid">
+                    <p class="placeholder-text">Избери дата отгоре.</p>
+                </div>
+
+                <div id="clientDetails" style="display:none;">
+                    <input type="text" id="clientName" placeholder="Твоето Име" required>
+                    <input type="tel" id="clientPhone" placeholder="Телефон" required>
+                    <small id="phoneError" style="color: #ff4444; display: none; margin-bottom: 10px;">Невалиден телефон (напр. 0888123456)</small>
+                    <div id="blockedMessage" style="display: none; background: rgba(255, 61, 113, 0.15); border: 1px solid rgba(255, 61, 113, 0.3); border-radius: 10px; padding: 15px; margin-bottom: 15px; text-align: center;">
+                        <div style="font-size: 28px; margin-bottom: 8px;">🚫</div>
+                        <p style="color: #FF5E82; font-weight: 600; margin: 0;">Не можете да запазите час</p>
+                    </div>
+                    <input type="email" id="clientEmail" placeholder="Email (незадължително)">
+                    <small style="color: #888; display: block; margin-bottom: 15px; font-size: 12px;">За получаване на потвърждение и напомняне</small>
+                    <button class="btn" id="submitBtn" onclick="submitBooking()">
+                        <span class="btn-text">Изпрати заявка</span>
+                        <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Изпращане...</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal with Auto-Refresh Status -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-content">
+            <!-- Pending State -->
+            <div id="statusPending">
+                <div class="status-icon pending-pulse">⏳</div>
+                <h2>Заявката е изпратена!</h2>
+                <p>Очакваме потвърждение от Халил...</p>
+                <div class="confirmation-box">
+                    <p>Вашият код:</p>
+                    <div class="confirmation-code" id="confirmationCode">-</div>
+                </div>
+                <div class="auto-refresh-note">
+                    <div class="spinner"></div>
+                    <span>Проверяваме статуса автоматично...</span>
+                </div>
+                <p class="success-note">Можете да затворите тази страница. Ще ви уведомим!</p>
+                <button class="btn btn-secondary" onclick="closeSuccess()">Затвори</button>
+            </div>
+
+            <!-- Confirmed State -->
+            <div id="statusConfirmed" style="display: none;">
+                <div class="status-icon confirmed-bounce">✅</div>
+                <h2>Часът е ПОТВЪРДЕН!</h2>
+                <div class="booking-details" id="bookingDetails"></div>
+                <div class="confirmation-box success-box">
+                    <p>Код за резервация:</p>
+                    <div class="confirmation-code" id="confirmationCodeConfirmed">-</div>
+                </div>
+                <p class="success-note">Очакваме ви! 💈</p>
+                <button class="btn" onclick="closeSuccess()">Страхотно!</button>
+            </div>
+
+            <!-- Rejected State -->
+            <div id="statusRejected" style="display: none;">
+                <div class="status-icon">❌</div>
+                <h2>Часът е отказан</h2>
+                <p>За съжаление този час не е наличен.</p>
+                <p>Моля, изберете друг час или се свържете с нас.</p>
+                <a href="tel:+359896109709" class="btn">📞 Обади се</a>
+                <button class="btn btn-secondary" onclick="closeSuccess()">Затвори</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <section id="info" class="info-section">
+        <div class="info-container">
+            <!-- Left Side - Big Info Card -->
+            <div class="info-main" data-aos="fade-right">
+                <div class="barber-pole"></div>
+                <div class="info-main-content">
+                    <h2>Намери ни</h2>
+                    <div class="location-display">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <span class="district-name">кв. Коматево, Пловдив</span>
+                            <span class="street-name">ул. „Коматевско шосе" 278</span>
+                        </div>
+                    </div>
+                    <div class="rating-display">
+                        <div class="stars">★★★★★</div>
+                        <span>5.0 от 53 отзива</span>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=ул.+Коматевско+шосе+278,+Пловдив" target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Упътване
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Side - Info Cards -->
+            <div class="info-cards" data-aos="fade-left">
+                <!-- Hours Card -->
+                <div class="info-card">
+                    <div class="info-card-icon"><i class="fas fa-clock"></i></div>
+                    <div class="info-card-content">
+                        <h4>Работно време</h4>
+                        <div class="hours-list">
+                            <div class="hour-row">
+                                <span>Пон - Пет</span>
+                                <span class="hour-time">10:00 - 19:00</span>
+                            </div>
+                            <div class="hour-row">
+                                <span>Събота</span>
+                                <span class="hour-time">10:00 - 14:00</span>
+                            </div>
+                            <div class="hour-row closed">
+                                <span>Неделя</span>
+                                <span class="hour-time">Затворено</span>
+                            </div>
+                            <div class="hour-row break">
+                                <span>Почивка</span>
+                                <span class="hour-time">13:00 - 15:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="info-card">
+                    <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-card-content">
+                        <h4>Контакти</h4>
+                        <a href="tel:+359896109709" class="contact-link">
+                            <i class="fas fa-phone"></i> 089 610 9709
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Card -->
+                <div class="info-card">
+                    <div class="info-card-icon"><i class="fas fa-share-alt"></i></div>
+                    <div class="info-card-content">
+                        <h4>Социални мрежи</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Запази своя час</h2>
+        <p>Не чакай, местата се запълват бързо.</p>
+        <a href="tel:+359896109709" class="btn"><i class="fas fa-phone"></i> 089 610 9709</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Barbershop Halil. Всички права запазени.</p>
+    </footer>
+
+    <style>
+        /* Status Icons */
+        .status-icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+        }
+
+        .pending-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .confirmed-bounce {
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Auto-refresh indicator */
+        .auto-refresh-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #888;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #333;
+            border-top-color: #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Booking details */
+        .booking-details {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .booking-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .booking-details .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .booking-details .label {
+            color: #888;
+        }
+
+        .booking-details .value {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Success box variation */
+        .success-box {
+            border-color: #00D68F;
+            background: rgba(0, 214, 143, 0.1);
+        }
+
+        /* Secondary button */
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Confirmation Code Box */
+        .confirmation-box {
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px dashed #d4af37;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .confirmation-box p {
+            margin: 0 0 10px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .confirmation-box small {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .confirmation-code {
+            font-family: 'Courier New', monospace;
+            font-size: 28px;
+            font-weight: bold;
+            color: #d4af37;
+            letter-spacing: 3px;
+            padding: 10px;
+        }
+
+        .success-note {
+            color: #888;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* Button loading state */
+        #submitBtn {
+            position: relative;
+            min-width: 180px;
+        }
+
+        #submitBtn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    </style>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true });
+            } else {
+                // AOS still loading, wait for it
+                const waitAOS = setInterval(() => {
+                    if (typeof AOS !== 'undefined') {
+                        clearInterval(waitAOS);
+                        AOS.init({ duration: 800, once: true });
+                    }
+                }, 50);
+                setTimeout(() => clearInterval(waitAOS), 5000);
+            }
+        });
+
+        // Service prices map (matching server-side)
+        const SERVICE_PRICES = {
+            'Мъжко Подстригване': 25,
+            'Оформяне на Брада': 15,
+            'Пълен Пакет': 35,
+            'Детско Подстригване': 20
+        };
+
+        // Toast Notification Function
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerText = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => { toast.classList.add('show'); }, 100);
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        const modal = document.getElementById("bookingModal");
+        let currentService = "";
+        let currentPrice = 0;
+        let selectedTime = null;
+
+        function selectService(name, price) {
+            currentService = name;
+            currentPrice = price;
+            document.getElementById("selectedService").innerText = name + " (" + price + " лв.)";
+            modal.style.display = "block";
+
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById("datePicker").value = today;
+
+            generateDates();
+        }
+
+        function generateDates() {
+            const scroller = document.getElementById("dateScroller");
+            scroller.innerHTML = "";
+            const days = ['Нед', 'Пон', 'Вто', 'Сря', 'Чет', 'Пет', 'Съб'];
+            const months = ['Яну', 'Фев', 'Мар', 'Апр', 'Май', 'Юни', 'Юли', 'Авг', 'Сеп', 'Окт', 'Ное', 'Дек'];
+
+            for(let i=0; i<14; i++) {
+                const d = new Date();
+                d.setDate(d.getDate() + i);
+                const isoDate = d.toISOString().split('T')[0];
+                const dayName = i === 0 ? "Днес" : i === 1 ? "Утре" : days[d.getDay()];
+                const monthName = months[d.getMonth()];
+
+                const card = document.createElement("div");
+                card.className = "date-card";
+                if(i===0) card.classList.add("active");
+                card.onclick = () => selectDate(card, isoDate);
+
+                card.innerHTML = `
+                    <span class="day-name">${dayName}</span>
+                    <span class="day-number">${d.getDate()}</span>
+                    <span class="month-name">${monthName}</span>
+                `;
+
+                scroller.appendChild(card);
+
+                if(i===0) {
+                    document.getElementById("datePicker").value = isoDate;
+                    loadSlots();
+                }
+            }
+        }
+
+        function selectDate(el, date) {
+            document.querySelectorAll(".date-card").forEach(c => c.classList.remove("active"));
+            el.classList.add("active");
+            document.getElementById("datePicker").value = date;
+            loadSlots();
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+            document.getElementById("clientDetails").style.display = "none";
+            document.getElementById("clientName").value = "";
+            document.getElementById("clientPhone").value = "";
+            document.getElementById("clientEmail").value = "";
+            document.getElementById("clientEmail").style.display = "";
+            document.getElementById("clientEmail").nextElementSibling.style.display = "";
+            document.getElementById("blockedMessage").style.display = "none";
+            document.getElementById("submitBtn").style.display = "";
+            selectedTime = null;
+        }
+
+        let statusCheckTimeout = null;
+        let currentBookingCode = null;
+        let pollCount = 0;
+        const POLL_INTERVALS = [3, 5, 5, 10, 10, 15, 15, 30]; // seconds
+
+        function closeSuccess() {
+            document.getElementById("successModal").style.display = "none";
+            if (statusCheckTimeout) {
+                clearTimeout(statusCheckTimeout);
+                statusCheckTimeout = null;
+            }
+            pollCount = 0;
+            document.getElementById("statusPending").style.display = "block";
+            document.getElementById("statusConfirmed").style.display = "none";
+            document.getElementById("statusRejected").style.display = "none";
+        }
+
+        function showBookingStatus(code, bookingData) {
+            currentBookingCode = code;
+            document.getElementById("confirmationCode").innerText = code;
+            document.getElementById("successModal").style.display = "block";
+            pollCount = 0;
+            startStatusPolling(code, bookingData);
+        }
+
+        function startStatusPolling(code, bookingData) {
+            checkStatus(code, bookingData);
+        }
+
+        function scheduleNextPoll(code, bookingData) {
+            const interval = POLL_INTERVALS[Math.min(pollCount, POLL_INTERVALS.length - 1)] * 1000;
+            pollCount++;
+            statusCheckTimeout = setTimeout(() => {
+                if (document.hidden) {
+                    // Page not visible, wait until it is
+                    const onVisible = () => {
+                        document.removeEventListener('visibilitychange', onVisible);
+                        checkStatus(code, bookingData);
+                    };
+                    document.addEventListener('visibilitychange', onVisible);
+                } else {
+                    checkStatus(code, bookingData);
+                }
+            }, interval);
+        }
+
+        async function checkStatus(code, bookingData) {
+            try {
+                const res = await fetch(`/api/status/${code}?t=${Date.now()}`, {
+                    cache: 'no-store'
+                });
+                if (!res.ok) { scheduleNextPoll(code, bookingData); return; }
+
+                const data = await res.json();
+
+                if (data.status === 'confirmed') {
+                    document.getElementById("statusPending").style.display = "none";
+                    document.getElementById("statusConfirmed").style.display = "block";
+                    document.getElementById("confirmationCodeConfirmed").innerText = code;
+                    document.getElementById("bookingDetails").innerHTML = `
+                        <div class="detail-row">
+                            <span class="label">📅 Дата</span>
+                            <span class="value">${formatDateBg(data.date)}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">⏰ Час</span>
+                            <span class="value">${data.time}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">✂️ Услуга</span>
+                            <span class="value">${data.service}</span>
+                        </div>
+                    `;
+                } else if (data.status === 'rejected') {
+                    document.getElementById("statusPending").style.display = "none";
+                    document.getElementById("statusRejected").style.display = "block";
+                } else {
+                    // Still pending, continue polling
+                    scheduleNextPoll(code, bookingData);
+                }
+            } catch (e) {
+                console.error('Status check failed:', e);
+                scheduleNextPoll(code, bookingData);
+            }
+        }
+
+        function formatDateBg(dateStr) {
+            const date = new Date(dateStr);
+            const days = ['Неделя', 'Понеделник', 'Вторник', 'Сряда', 'Четвъртък', 'Петък', 'Събота'];
+            const months = ['януари', 'февруари', 'март', 'април', 'май', 'юни',
+                            'юли', 'август', 'септември', 'октомври', 'ноември', 'декември'];
+            return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
+        }
+
+        async function loadSlots() {
+            const date = document.getElementById("datePicker").value;
+            if (!date) return;
+
+            const grid = document.getElementById("slotsGrid");
+            grid.innerHTML = "<p>Зареждане...</p>";
+
+            try {
+                const res = await fetch(`/api/slots?date=${date}`);
+                const slots = await res.json();
+
+                grid.innerHTML = "";
+
+                // Check if selected date is today
+                const today = new Date();
+                const todayStr = today.toISOString().split('T')[0];
+                const isToday = date === todayStr;
+                const currentHour = today.getHours();
+                const currentMinute = today.getMinutes();
+
+                // Filter out past slots if today
+                const availableSlots = slots.filter(slot => {
+                    if (!isToday) return true;
+                    const [slotHour, slotMinute] = slot.time.split(':').map(Number);
+                    // Hide slot if its time has passed
+                    if (slotHour < currentHour) return false;
+                    if (slotHour === currentHour && slotMinute <= currentMinute) return false;
+                    return true;
+                });
+
+                if(availableSlots.length === 0) {
+                    grid.innerHTML = "<p>Няма свободни часове за тази дата.</p>";
+                    return;
+                }
+
+                availableSlots.forEach(slot => {
+                    const div = document.createElement("div");
+
+                    if (slot.status === 'free') {
+                        div.className = "time-slot free";
+                        div.innerText = slot.time;
+                        div.onclick = () => selectTime(div, slot.time);
+                        grid.appendChild(div);
+                    } else {
+                        div.className = "time-slot taken";
+                        div.innerText = slot.time;
+                        div.title = slot.status === 'confirmed' ? "Зает" : "Изчаква";
+                        grid.appendChild(div);
+                    }
+                });
+            } catch (e) {
+                console.error(e);
+                grid.innerHTML = "<p>Грешка при връзка със сървъра.</p>";
+            }
+        }
+
+        function selectTime(el, time) {
+            document.querySelectorAll('.time-slot.selected').forEach(d => d.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedTime = time;
+            document.getElementById("clientDetails").style.display = "block";
+        }
+
+        function validateInput(id, regex) {
+            const el = document.getElementById(id);
+            const valid = regex ? regex.test(el.value) : el.value.trim().length > 0;
+
+            el.style.borderColor = valid ? "#555" : "red";
+            if(id === "clientPhone") {
+                document.getElementById("phoneError").style.display = valid ? "none" : "block";
+            }
+            return valid;
+        }
+
+        async function submitBooking() {
+            const nameValid = validateInput("clientName");
+            const phoneValid = validateInput("clientPhone", /^(\+359|0)8[7-9][0-9]{7}$/);
+
+            if (!nameValid || !phoneValid || !selectedTime) {
+                if(!selectedTime) alert("Моля изберете час!");
+                return;
+            }
+
+            const name = document.getElementById("clientName").value;
+            const phone = document.getElementById("clientPhone").value;
+            const email = document.getElementById("clientEmail").value.trim();
+            const date = document.getElementById("datePicker").value;
+            const btn = document.getElementById('submitBtn');
+
+            // Show loading state
+            btn.disabled = true;
+            btn.querySelector('.btn-text').style.display = 'none';
+            btn.querySelector('.btn-loading').style.display = 'inline';
+
+            try {
+                // Get price from our map (not from string matching)
+                const price = SERVICE_PRICES[currentService] || currentPrice;
+
+                const res = await fetch('/api/book', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        date,
+                        time: selectedTime,
+                        service: currentService,
+                        price: price,
+                        clientName: name,
+                        clientPhone: phone,
+                        clientEmail: email || null
+                    })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    closeModal();
+                    // Show status modal with auto-refresh
+                    showBookingStatus(data.confirmationCode, {
+                        date: date,
+                        time: selectedTime,
+                        service: currentService
+                    });
+                } else if (data.error === 'blocked') {
+                    document.getElementById('blockedMessage').style.display = 'block';
+                    document.getElementById('submitBtn').style.display = 'none';
+                    document.getElementById('clientEmail').style.display = 'none';
+                    document.getElementById('clientEmail').nextElementSibling.style.display = 'none';
+                } else {
+                    alert("Грешка: " + (data.error || "Възникна проблем."));
+                    loadSlots();
+                }
+
+            } catch (e) {
+                alert("Сървърна грешка");
+            }
+
+            // Reset button state
+            btn.disabled = false;
+            btn.querySelector('.btn-text').style.display = 'inline';
+            btn.querySelector('.btn-loading').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Scroll spy for navigation highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+
+        function highlightNav() {
+            const scrollY = window.scrollY;
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightNav);
+        highlightNav();
+    </script>
+</body>
+</html>

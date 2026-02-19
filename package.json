@@ -1,0 +1,29 @@
+{
+  "name": "halil",
+  "version": "1.0.0",
+  "description": "Barbershop Halil - Online booking system",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "barbershop",
+    "booking",
+    "appointments"
+  ],
+  "author": "Halil Barber",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "compression": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^16.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.17.3",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.8",
+    "sqlite3": "^5.1.7"
+  }
+}
