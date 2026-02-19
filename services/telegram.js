@@ -11,10 +11,18 @@ const https = require('https');
 
 let db = null;
 let botToken = null;
+let config = null;
+
+function biz() {
+    const b = config && config.business || {};
+    const a = b.address || {};
+    return { name: b.name || 'Бизнес', street: a.street || '', district: a.district || '', city: a.city || '' };
+}
 
 // Initialize Telegram Bot
-function initTelegram(database) {
+function initTelegram(database, cfg) {
     db = database;
+    config = cfg || {};
     botToken = process.env.TELEGRAM_BOT_TOKEN;
 
     if (!botToken || botToken === 'your-telegram-bot-token-here') {
@@ -86,7 +94,7 @@ function handleUpdate(update) {
     if (text === '/start') {
         sendMessage(chatId,
             `Здравейте, ${firstName}! 👋\n\n` +
-            `Добре дошли в Barbershop Halil!\n\n` +
+            `Добре дошли в ${biz().name}!\n\n` +
             `За да получавате известия за резервациите си, моля изпратете вашия телефонен номер.\n\n` +
             `Пример: 0888123456`
         );
@@ -238,8 +246,8 @@ async function sendConfirmation(phone, appointment) {
             `✂️ Услуга: ${appointment.service}\n` +
             `💰 Цена: ${appointment.price} лв.\n\n` +
             `📍 <b>Адрес:</b>\n` +
-            `ул. „Коматевско шосе" 278\n` +
-            `кв. Коматево, Пловдив\n\n` +
+            `${biz().street}\n` +
+            `${biz().district}, ${biz().city}\n\n` +
             `🎫 Код: <code>${appointment.confirmationCode || '-'}</code>\n\n` +
             `⏰ Ще получите напомняне 30 мин. преди часа.`;
 
@@ -268,11 +276,11 @@ async function sendReminder(phone, appointment) {
 
         const message =
             `⏰ <b>Напомняне!</b>\n\n` +
-            `Вашият час при Barbershop Halil е след <b>30 минути</b>.\n\n` +
+            `Вашият час при ${biz().name} е след <b>30 минути</b>.\n\n` +
             `⏰ ${appointment.time}\n` +
             `✂️ ${appointment.service}\n\n` +
-            `📍 ул. „Коматевско шосе" 278\n` +
-            `кв. Коматево, Пловдив\n\n` +
+            `📍 ${biz().street}\n` +
+            `${biz().district}, ${biz().city}\n\n` +
             `Очакваме ви! 💈`;
 
         await sendMessage(chatId, message);

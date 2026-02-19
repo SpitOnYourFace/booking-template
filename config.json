@@ -1,0 +1,104 @@
+{
+  "_comment": "Конфигурация на бизнеса. Промени този файл за нов клиент — целият сайт се адаптира автоматично.",
+
+  "business": {
+    "name": "Barbershop Halil",
+    "shortName": "HALIL BARBER",
+    "tagline": "Стилът, който заслужаваш",
+    "description": "Класическо бръснене и модерно подстригване в сърцето на Пловдив.",
+    "phone": "+359896109709",
+    "phoneDisplay": "089 610 9709",
+    "email": null,
+    "address": {
+      "street": "ул. „Коматевско шосе" 278",
+      "district": "кв. Коматево",
+      "city": "Пловдив",
+      "googleMapsQuery": "ул.+Коматевско+шосе+278,+Пловдив"
+    },
+    "social": {
+      "instagram": "#",
+      "facebook": "#",
+      "tiktok": "#"
+    },
+    "rating": {
+      "score": "5.0",
+      "count": 53
+    },
+    "year": 2026
+  },
+
+  "theme": {
+    "primaryColor": "#d4af37",
+    "primaryColorHover": "#b5952f",
+    "bgColor": "#111",
+    "heroImage": "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80",
+    "logo": "bg.png",
+    "fonts": {
+      "heading": "Oswald",
+      "body": "Roboto"
+    }
+  },
+
+  "services": [
+    {
+      "name": "Мъжко Подстригване",
+      "price": 25,
+      "description": "Класическо или модерно, с внимание към детайла.",
+      "icon": "fas fa-cut",
+      "featured": false
+    },
+    {
+      "name": "Оформяне на Брада",
+      "price": 15,
+      "description": "Подстригване, контуриране и терапия с топли кърпи.",
+      "icon": "fas fa-user",
+      "featured": false
+    },
+    {
+      "name": "Пълен Пакет",
+      "price": 35,
+      "description": "Подстригване + Брада + Измиване и стайлинг.",
+      "icon": "fas fa-crown",
+      "featured": true
+    },
+    {
+      "name": "Детско Подстригване",
+      "price": 20,
+      "description": "За малките джентълмени (до 12г).",
+      "icon": "fas fa-child",
+      "featured": false
+    }
+  ],
+
+  "workHours": {
+    "slots": [
+      "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+      "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
+    ],
+    "display": [
+      { "days": "Пон - Пет", "hours": "10:00 - 19:00" },
+      { "days": "Събота", "hours": "10:00 - 14:00" },
+      { "days": "Неделя", "hours": "Затворено", "closed": true },
+      { "days": "Почивка", "hours": "13:00 - 15:00", "break": true }
+    ]
+  },
+
+  "booking": {
+    "confirmationPrefix": "HB",
+    "daysAhead": 14,
+    "currency": "лв.",
+    "phoneRegex": "^(\\+359|0)8[7-9][0-9]{7}$"
+  },
+
+  "seo": {
+    "title": "Barbershop Halil - Пловдив",
+    "description": "Най-доброто подстригване и оформяне на брада в Пловдив. Barbershop Halil - класическо бръснене, модерно подстригване. Запази час онлайн!",
+    "keywords": "бръснарница, подстригване, Пловдив, барбершоп, брада, мъжко подстригване, Халил",
+    "ogUrl": "https://halilbarber.com"
+  },
+
+  "admin": {
+    "title": "Админ Панел",
+    "ownerName": "Халил"
+  }
+}

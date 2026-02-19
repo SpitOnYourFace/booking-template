@@ -8,6 +8,9 @@ const compression = require('compression');
 const session = require('express-session');
 const path = require('path');
 
+// Load config
+const config = require('./config.json');
+
 // Notification services
 const telegram = require('./services/telegram');
 const email = require('./services/email');
@@ -16,13 +19,15 @@ const scheduler = require('./scheduler');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Service prices map (server-side validation)
-const SERVICES = {
-    'Мъжко Подстригване': 25,
-    'Оформяне на Брада': 15,
-    'Пълен Пакет': 35,
-    'Детско Подстригване': 20
-};
+// Build SERVICES map from config
+const SERVICES = {};
+config.services.forEach(s => { SERVICES[s.name] = s.price; });
+
+// Work hours from config
+const WORK_HOURS = config.workHours.slots;
+
+// Phone regex from config
+const PHONE_REGEX = new RegExp(config.booking.phoneRegex);
 
 // CORS Configuration
 const allowedOrigins = process.env.ALLOWED_ORIGINS
@@ -141,8 +146,8 @@ db.serialize(() => {
 
     // Initialize notification services after database is ready
     setTimeout(() => {
-        telegram.initTelegram(db);
-        email.initEmail(db);
+        telegram.initTelegram(db, config);
+        email.initEmail(db, config);
         scheduler.initScheduler(db, telegram, email);
     }, 1000);
 });
@@ -150,19 +155,12 @@ db.serialize(() => {
 // Helper: Generate confirmation code
 function generateConfirmationCode() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let code = 'HB-';
+    let code = config.booking.confirmationPrefix + '-';
     for (let i = 0; i < 6; i++) {
         code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return code;
 }
-
-// Helper: Generate slots for a day
-// Break time: 13:00 - 15:00
-const WORK_HOURS = [
-    "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
-    "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
-];
 
 // Auth middleware for admin routes
 function requireAuth(req, res, next) {
@@ -171,6 +169,19 @@ function requireAuth(req, res, next) {
 }
 
 // ============ PUBLIC API ============
+
+// Public config endpoint (no secrets)
+app.get('/api/config', (req, res) => {
+    res.json({
+        business: config.business,
+        theme: config.theme,
+        services: config.services,
+        workHours: config.workHours,
+        booking: config.booking,
+        seo: config.seo,
+        admin: config.admin
+    });
+});
 
 // Health Check
 app.get('/api/health', (req, res) => {
@@ -264,9 +275,8 @@ app.post('/api/book', (req, res) => {
         return res.status(400).json({ error: "Invalid service" });
     }
 
-    const phoneRegex = /^(\+359|0)8[7-9][0-9]{7}$/;
     const cleanPhoneForValidation = clientPhone.replace(/[^0-9+]/g, '');
-    if (!phoneRegex.test(cleanPhoneForValidation)) {
+    if (!PHONE_REGEX.test(cleanPhoneForValidation)) {
         return res.status(400).json({ error: "Invalid phone number format" });
     }
 

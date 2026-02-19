@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админ Панел - Halil Barber</title>
+    <title id="adminPageTitle">Админ Панел</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
     <link rel="stylesheet" href="admin-style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,8 +21,8 @@
         <div class="login-container">
             <div class="login-header">
                 <i class="fas fa-cut"></i>
-                <h1>Halil Barber</h1>
-                <p>Админ Панел</p>
+                <h1 id="loginTitle">...</h1>
+                <p id="loginSubtitle">Админ Панел</p>
             </div>
             <form id="loginForm" onsubmit="handleLogin(event)">
                 <div class="form-group">
@@ -47,7 +47,7 @@
         <aside class="sidebar" id="sidebar">
             <div class="logo">
                 <i class="fas fa-cut"></i>
-                <span>HalilBarber</span>
+                <span id="sidebarBrand">...</span>
             </div>
             <nav class="menu">
                 <a href="#" class="active" onclick="switchView('dashboard')"><i class="fas fa-inbox"></i> Резервации</a>
@@ -93,7 +93,7 @@
                         <div class="profile-avatar">
                             <i class="fas fa-user"></i>
                         </div>
-                        <span>Халил</span>
+                        <span id="profileName">...</span>
                     </div>
                 </div>
             </header>
@@ -1086,6 +1086,20 @@
                 dropdown.classList.remove('open');
             }
         });
+
+        // Load config for dynamic branding
+        async function loadAdminConfig() {
+            try {
+                const res = await fetch('/api/config');
+                const cfg = await res.json();
+                document.getElementById('adminPageTitle').textContent = cfg.admin.title + ' - ' + cfg.business.shortName;
+                document.getElementById('loginTitle').textContent = cfg.business.shortName;
+                document.getElementById('loginSubtitle').textContent = cfg.admin.title;
+                document.getElementById('sidebarBrand').textContent = cfg.business.shortName;
+                document.getElementById('profileName').textContent = cfg.admin.ownerName;
+            } catch(e) { console.error('Config load failed:', e); }
+        }
+        loadAdminConfig();
 
         // Check authentication on load
         async function checkAuth() {

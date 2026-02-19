@@ -15,10 +15,27 @@ const nodemailer = require('nodemailer');
 
 let transporter = null;
 let db = null;
+let config = null;
+
+// Business info helpers (read from config)
+function biz() {
+    const b = config && config.business || {};
+    const a = b.address || {};
+    return {
+        name: b.name || 'Бизнес',
+        phone: b.phone || '',
+        phoneDisplay: b.phoneDisplay || '',
+        street: a.street || '',
+        district: a.district || '',
+        city: a.city || '',
+        year: b.year || new Date().getFullYear()
+    };
+}
 
 // Initialize Email Service
-function initEmail(database) {
+function initEmail(database, cfg) {
     db = database;
+    config = cfg || {};
 
     const host = process.env.EMAIL_HOST;
     const port = process.env.EMAIL_PORT || 587;
@@ -96,7 +113,7 @@ async function sendConfirmation(email, appointment) {
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>💈 Barbershop Halil</h1>
+                    <h1>💈 ${biz().name}</h1>
                 </div>
                 <div class="content">
                     <span class="success-badge">✅ Часът е потвърден!</span>
@@ -127,8 +144,8 @@ async function sendConfirmation(email, appointment) {
 
                     <div class="address">
                         <div style="color: #d4af37; margin-bottom: 10px;">📍 Адрес:</div>
-                        <div>ул. „Коматевско шосе" 278</div>
-                        <div style="color: #888;">кв. Коматево, Пловдив</div>
+                        <div>${biz().street}</div>
+                        <div style="color: #888;">${biz().district}, ${biz().city}</div>
                     </div>
 
                     <p style="color: #888; text-align: center; margin-top: 20px;">
@@ -136,7 +153,7 @@ async function sendConfirmation(email, appointment) {
                     </p>
                 </div>
                 <div class="footer">
-                    © 2026 Barbershop Halil | 📞 089 610 9709
+                    © ${biz().year} ${biz().name} | 📞 ${biz().phoneDisplay}
                 </div>
             </div>
         </body>
@@ -144,7 +161,7 @@ async function sendConfirmation(email, appointment) {
         `;
 
         const info = await transporter.sendMail({
-            from: `"Barbershop Halil" <${process.env.EMAIL_USER}>`,
+            from: `"${biz().name}" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: `✅ Потвърден час - ${formatDate(appointment.date)} в ${appointment.time}`,
             html: html
@@ -194,7 +211,7 @@ async function sendRejection(emailAddr, appointment) {
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>💈 Barbershop Halil</h1>
+                    <h1>💈 ${biz().name}</h1>
                 </div>
                 <div class="content">
                     <span class="reject-badge">❌ Часът е отказан</span>
@@ -230,7 +247,7 @@ async function sendRejection(emailAddr, appointment) {
                     </p>
                 </div>
                 <div class="footer">
-                    © 2026 Barbershop Halil | 📞 089 610 9709
+                    © ${biz().year} ${biz().name} | 📞 ${biz().phoneDisplay}
                 </div>
             </div>
         </body>
@@ -238,7 +255,7 @@ async function sendRejection(emailAddr, appointment) {
         `;
 
         await transporter.sendMail({
-            from: `"Barbershop Halil" <${process.env.EMAIL_USER}>`,
+            from: `"${biz().name}" <${process.env.EMAIL_USER}>`,
             to: emailAddr,
             subject: `❌ Отказан час - ${formatDate(appointment.date)} в ${appointment.time}`,
             html: html
@@ -287,15 +304,15 @@ async function sendReminder(email, appointment) {
                     <h1>⏰ Напомняне!</h1>
                 </div>
                 <div class="content">
-                    <p>Вашият час при Barbershop Halil е след <strong>30 минути</strong></p>
+                    <p>Вашият час при ${biz().name} е след <strong>30 минути</strong></p>
 
                     <div class="time-big">${appointment.time}</div>
                     <div class="service">✂️ ${appointment.service}</div>
 
                     <div class="address">
                         <div style="color: #d4af37; margin-bottom: 10px;">📍 Адрес:</div>
-                        <div>ул. „Коматевско шосе" 278</div>
-                        <div style="color: #888;">кв. Коматево, Пловдив</div>
+                        <div>${biz().street}</div>
+                        <div style="color: #888;">${biz().district}, ${biz().city}</div>
                     </div>
 
                     <p style="color: #d4af37; margin-top: 30px; font-size: 18px;">
@@ -303,7 +320,7 @@ async function sendReminder(email, appointment) {
                     </p>
                 </div>
                 <div class="footer">
-                    © 2026 Barbershop Halil | 📞 089 610 9709
+                    © ${biz().year} ${biz().name} | 📞 ${biz().phoneDisplay}
                 </div>
             </div>
         </body>
@@ -311,7 +328,7 @@ async function sendReminder(email, appointment) {
         `;
 
         await transporter.sendMail({
-            from: `"Barbershop Halil" <${process.env.EMAIL_USER}>`,
+            from: `"${biz().name}" <${process.env.EMAIL_USER}>`,
             to: email,
             subject: `⏰ Напомняне: Часът ви е след 30 минути!`,
             html: html
@@ -398,7 +415,7 @@ async function sendAdminNotification(adminEmail, appointment, action) {
                     </div>
                 </div>
                 <div class="footer">
-                    Barbershop Halil - Admin Notification
+                    ${biz().name} - Admin Notification
                 </div>
             </div>
         </body>
@@ -406,7 +423,7 @@ async function sendAdminNotification(adminEmail, appointment, action) {
         `;
 
         await transporter.sendMail({
-            from: `"Barbershop Halil" <${process.env.EMAIL_USER}>`,
+            from: `"${biz().name}" <${process.env.EMAIL_USER}>`,
             to: adminEmail,
             subject: `${statusEmoji} ${statusText}: ${appointment.clientName} - ${formatDate(appointment.date)} ${appointment.time}`,
             html: html

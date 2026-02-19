@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbershop Halil - Пловдив</title>
+    <title id="pageTitle">Зареждане...</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Най-доброто подстригване и оформяне на брада в Пловдив. Barbershop Halil - класическо бръснене, модерно подстригване. Запази час онлайн!">
-    <meta name="keywords" content="бръснарница, подстригване, Пловдив, барбершоп, брада, мъжко подстригване, Халил">
-    <meta name="author" content="Barbershop Halil">
+    <!-- SEO Meta Tags (updated dynamically) -->
+    <meta name="description" id="metaDescription" content="">
+    <meta name="keywords" id="metaKeywords" content="">
+    <meta name="author" id="metaAuthor" content="">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Barbershop Halil - Най-доброто подстригване в Пловдив">
-    <meta property="og:description" content="Класическо бръснене, модерно подстригване и оформяне на брада. Запази час онлайн сега!">
-    <meta property="og:image" content="/bg.png">
-    <meta property="og:url" content="https://halilbarber.com">
-    <meta property="og:site_name" content="Barbershop Halil">
+    <meta property="og:title" id="ogTitle" content="">
+    <meta property="og:description" id="ogDescription" content="">
+    <meta property="og:image" id="ogImage" content="">
+    <meta property="og:url" id="ogUrl" content="">
+    <meta property="og:site_name" id="ogSiteName" content="">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Barbershop Halil - Пловдив">
-    <meta name="twitter:description" content="Класическо бръснене и модерно подстригване в сърцето на Пловдив.">
+    <meta name="twitter:title" id="twTitle" content="">
+    <meta name="twitter:description" id="twDescription" content="">
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#d4af37">
@@ -51,7 +51,7 @@
 
     <!-- Navigation -->
     <header data-aos="fade-down">
-        <div class="logo">HALIL BARBER</div>
+        <div class="logo" id="siteLogo">...</div>
         <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
             <i class="fas fa-bars"></i>
         </div>
@@ -66,9 +66,9 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <img src="bg.png" alt="Barbershop Halil Logo" class="hero-logo" data-aos="zoom-in">
-        <h1 data-aos="zoom-in" data-aos-delay="200">Стилът, който <span>заслужаваш</span></h1>
-        <p data-aos="fade-up" data-aos-delay="400">Класическо бръснене и модерно подстригване в сърцето на Пловдив.</p>
+        <img id="heroLogo" src="" alt="" class="hero-logo" data-aos="zoom-in">
+        <h1 data-aos="zoom-in" data-aos-delay="200" id="heroTagline"></h1>
+        <p data-aos="fade-up" data-aos-delay="400" id="heroDescription"></p>
         <a href="#services" class="btn" data-aos="fade-up" data-aos-delay="600">Запази Час</a>
     </section>
 
@@ -83,44 +83,8 @@
                 <span class="line"></span>
             </div>
         </div>
-        <div class="service-grid">
-            <div class="service-card" data-aos="fade-up" onclick="selectService('Мъжко Подстригване', 25)">
-                <div class="service-icon"><i class="fas fa-cut"></i></div>
-                <h3>Мъжко Подстригване</h3>
-                <p>Класическо или модерно, с внимание към детайла.</p>
-                <div class="service-footer">
-                    <span class="price">25 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100" onclick="selectService('Оформяне на Брада', 15)">
-                <div class="service-icon"><i class="fas fa-user"></i></div>
-                <h3>Оформяне на Брада</h3>
-                <p>Подстригване, контуриране и терапия с топли кърпи.</p>
-                <div class="service-footer">
-                    <span class="price">15 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card featured" data-aos="fade-up" data-aos-delay="200" onclick="selectService('Пълен Пакет', 35)">
-                <div class="featured-badge"><i class="fas fa-star"></i> Препоръчано</div>
-                <div class="service-icon"><i class="fas fa-crown"></i></div>
-                <h3>Пълен Пакет</h3>
-                <p>Подстригване + Брада + Измиване и стайлинг.</p>
-                <div class="service-footer">
-                    <span class="price">35 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="300" onclick="selectService('Детско Подстригване', 20)">
-                <div class="service-icon"><i class="fas fa-child"></i></div>
-                <h3>Детско Подстригване</h3>
-                <p>За малките джентълмени (до 12г).</p>
-                <div class="service-footer">
-                    <span class="price">20 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
+        <div class="service-grid" id="serviceGrid">
+            <!-- Services rendered dynamically from config -->
         </div>
     </section>
 
@@ -202,7 +166,7 @@
                 <h2>Часът е отказан</h2>
                 <p>За съжаление този час не е наличен.</p>
                 <p>Моля, изберете друг час или се свържете с нас.</p>
-                <a href="tel:+359896109709" class="btn">📞 Обади се</a>
+                <a id="rejectedPhone" href="#" class="btn">📞 Обади се</a>
                 <button class="btn btn-secondary" onclick="closeSuccess()">Затвори</button>
             </div>
         </div>
@@ -219,15 +183,15 @@
                     <div class="location-display">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
-                            <span class="district-name">кв. Коматево, Пловдив</span>
-                            <span class="street-name">ул. „Коматевско шосе" 278</span>
+                            <span class="district-name" id="infoDistrict"></span>
+                            <span class="street-name" id="infoStreet"></span>
                         </div>
                     </div>
                     <div class="rating-display">
                         <div class="stars">★★★★★</div>
-                        <span>5.0 от 53 отзива</span>
+                        <span id="infoRating"></span>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=ул.+Коматевско+шосе+278,+Пловдив" target="_blank" class="directions-btn">
+                    <a id="infoDirections" href="#" target="_blank" class="directions-btn">
                         <i class="fas fa-directions"></i> Упътване
                     </a>
                 </div>
@@ -240,23 +204,8 @@
                     <div class="info-card-icon"><i class="fas fa-clock"></i></div>
                     <div class="info-card-content">
                         <h4>Работно време</h4>
-                        <div class="hours-list">
-                            <div class="hour-row">
-                                <span>Пон - Пет</span>
-                                <span class="hour-time">10:00 - 19:00</span>
-                            </div>
-                            <div class="hour-row">
-                                <span>Събота</span>
-                                <span class="hour-time">10:00 - 14:00</span>
-                            </div>
-                            <div class="hour-row closed">
-                                <span>Неделя</span>
-                                <span class="hour-time">Затворено</span>
-                            </div>
-                            <div class="hour-row break">
-                                <span>Почивка</span>
-                                <span class="hour-time">13:00 - 15:00</span>
-                            </div>
+                        <div class="hours-list" id="infoHours">
+                            <!-- Rendered from config -->
                         </div>
                     </div>
                 </div>
@@ -266,8 +215,8 @@
                     <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
                     <div class="info-card-content">
                         <h4>Контакти</h4>
-                        <a href="tel:+359896109709" class="contact-link">
-                            <i class="fas fa-phone"></i> 089 610 9709
+                        <a id="infoPhone" href="#" class="contact-link">
+                            <i class="fas fa-phone"></i> <span id="infoPhoneDisplay"></span>
                         </a>
                     </div>
                 </div>
@@ -277,10 +226,8 @@
                     <div class="info-card-icon"><i class="fas fa-share-alt"></i></div>
                     <div class="info-card-content">
                         <h4>Социални мрежи</h4>
-                        <div class="social-links">
-                            <a href="#" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>
+                        <div class="social-links" id="infoSocial">
+                            <!-- Rendered from config -->
                         </div>
                     </div>
                 </div>
@@ -292,11 +239,11 @@
     <section id="contact" class="contact">
         <h2 class="section-title">Запази своя час</h2>
         <p>Не чакай, местата се запълват бързо.</p>
-        <a href="tel:+359896109709" class="btn"><i class="fas fa-phone"></i> 089 610 9709</a>
+        <a id="ctaPhone" href="#" class="btn"><i class="fas fa-phone"></i> <span id="ctaPhoneDisplay"></span></a>
     </section>
 
     <footer>
-        <p>&copy; 2026 Barbershop Halil. Всички права запазени.</p>
+        <p id="footerText"></p>
     </footer>
 
     <style>
@@ -461,13 +408,118 @@
             }
         });
 
-        // Service prices map (matching server-side)
-        const SERVICE_PRICES = {
-            'Мъжко Подстригване': 25,
-            'Оформяне на Брада': 15,
-            'Пълен Пакет': 35,
-            'Детско Подстригване': 20
-        };
+        // Service prices map (loaded from config)
+        let SERVICE_PRICES = {};
+        let SITE_CONFIG = null;
+        let PHONE_REGEX = /^(\+359|0)8[7-9][0-9]{7}$/;
+
+        // Load config and render dynamic content
+        async function initFromConfig() {
+            try {
+                const res = await fetch('/api/config');
+                const cfg = await res.json();
+                SITE_CONFIG = cfg;
+
+                // Build prices map
+                cfg.services.forEach(s => { SERVICE_PRICES[s.name] = s.price; });
+
+                // Phone regex
+                if (cfg.booking.phoneRegex) {
+                    PHONE_REGEX = new RegExp(cfg.booking.phoneRegex);
+                }
+
+                // SEO
+                document.getElementById('pageTitle').textContent = cfg.seo.title;
+                document.getElementById('metaDescription').content = cfg.seo.description;
+                document.getElementById('metaKeywords').content = cfg.seo.keywords;
+                document.getElementById('metaAuthor').content = cfg.business.name;
+                document.getElementById('ogTitle').content = cfg.seo.title;
+                document.getElementById('ogDescription').content = cfg.business.description;
+                document.getElementById('ogImage').content = '/' + cfg.theme.logo;
+                document.getElementById('ogUrl').content = cfg.seo.ogUrl;
+                document.getElementById('ogSiteName').content = cfg.business.name;
+                document.getElementById('twTitle').content = cfg.seo.title;
+                document.getElementById('twDescription').content = cfg.business.description;
+
+                // Header
+                document.getElementById('siteLogo').textContent = cfg.business.shortName;
+
+                // Hero
+                document.getElementById('heroLogo').src = cfg.theme.logo;
+                document.getElementById('heroLogo').alt = cfg.business.name + ' Logo';
+                const words = cfg.business.tagline.split(' ');
+                const lastWord = words.pop();
+                document.getElementById('heroTagline').innerHTML = words.join(' ') + ' <span>' + lastWord + '</span>';
+                document.getElementById('heroDescription').textContent = cfg.business.description;
+
+                // Hero background
+                document.querySelector('.hero').style.background = 
+                    'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(\'' + cfg.theme.heroImage + '\')';
+                document.querySelector('.hero').style.backgroundSize = 'cover';
+                document.querySelector('.hero').style.backgroundPosition = 'center';
+
+                // Services
+                const grid = document.getElementById('serviceGrid');
+                grid.innerHTML = '';
+                cfg.services.forEach((svc, i) => {
+                    const card = document.createElement('div');
+                    card.className = 'service-card' + (svc.featured ? ' featured' : '');
+                    card.setAttribute('data-aos', 'fade-up');
+                    card.setAttribute('data-aos-delay', (i * 100).toString());
+                    card.onclick = () => selectService(svc.name, svc.price);
+                    card.innerHTML = (svc.featured ? '<div class="featured-badge"><i class="fas fa-star"></i> Препоръчано</div>' : '') +
+                        '<div class="service-icon"><i class="' + svc.icon + '"></i></div>' +
+                        '<h3>' + svc.name + '</h3>' +
+                        '<p>' + svc.description + '</p>' +
+                        '<div class="service-footer">' +
+                            '<span class="price">' + svc.price + ' ' + cfg.booking.currency + '</span>' +
+                            '<button class="book-btn">Запази</button>' +
+                        '</div>';
+                    grid.appendChild(card);
+                });
+
+                // Info section
+                document.getElementById('infoDistrict').textContent = cfg.business.address.district + ', ' + cfg.business.address.city;
+                document.getElementById('infoStreet').textContent = cfg.business.address.street;
+                document.getElementById('infoRating').textContent = cfg.business.rating.score + ' от ' + cfg.business.rating.count + ' отзива';
+                document.getElementById('infoDirections').href = 'https://www.google.com/maps/search/?api=1&query=' + cfg.business.address.googleMapsQuery;
+
+                // Work hours
+                const hoursList = document.getElementById('infoHours');
+                hoursList.innerHTML = '';
+                cfg.workHours.display.forEach(h => {
+                    const row = document.createElement('div');
+                    row.className = 'hour-row' + (h.closed ? ' closed' : '') + (h.break ? ' break' : '');
+                    row.innerHTML = '<span>' + h.days + '</span><span class="hour-time">' + h.hours + '</span>';
+                    hoursList.appendChild(row);
+                });
+
+                // Phone
+                document.getElementById('infoPhone').href = 'tel:' + cfg.business.phone;
+                document.getElementById('infoPhoneDisplay').textContent = cfg.business.phoneDisplay;
+                document.getElementById('ctaPhone').href = 'tel:' + cfg.business.phone;
+                document.getElementById('ctaPhoneDisplay').textContent = cfg.business.phoneDisplay;
+                document.getElementById('rejectedPhone').href = 'tel:' + cfg.business.phone;
+
+                // Social
+                const socialEl = document.getElementById('infoSocial');
+                socialEl.innerHTML = '';
+                if (cfg.business.social.instagram) socialEl.innerHTML += '<a href="' + cfg.business.social.instagram + '" class="social-btn instagram"><i class="fab fa-instagram"></i></a>';
+                if (cfg.business.social.facebook) socialEl.innerHTML += '<a href="' + cfg.business.social.facebook + '" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>';
+                if (cfg.business.social.tiktok) socialEl.innerHTML += '<a href="' + cfg.business.social.tiktok + '" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>';
+
+                // Footer
+                document.getElementById('footerText').innerHTML = '&copy; ' + cfg.business.year + ' ' + cfg.business.name + '. Всички права запазени.';
+
+                // Theme colors (CSS custom properties)
+                document.documentElement.style.setProperty('--primary-color', cfg.theme.primaryColor);
+
+            } catch (e) {
+                console.error('Failed to load config:', e);
+            }
+        }
+
+        initFromConfig();
 
         // Toast Notification Function
         function showToast(message, type = 'success') {
@@ -733,7 +785,7 @@
 
         async function submitBooking() {
             const nameValid = validateInput("clientName");
-            const phoneValid = validateInput("clientPhone", /^(\+359|0)8[7-9][0-9]{7}$/);
+            const phoneValid = validateInput("clientPhone", PHONE_REGEX);
 
             if (!nameValid || !phoneValid || !selectedTime) {
                 if(!selectedTime) alert("Моля изберете час!");
