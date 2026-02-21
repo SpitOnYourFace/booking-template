@@ -68,11 +68,15 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public'), {
     maxAge: '0',
+    etag: true,
+    lastModified: true,
     setHeaders: (res, filePath) => {
-        // No caching for any static files during development
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-        res.setHeader('Pragma', 'no-cache');
-        res.setHeader('Expires', '0');
+        // Short cache with revalidation — fast but always fresh
+        if (filePath.endsWith('.svg') || filePath.endsWith('.png') || filePath.endsWith('.jpg')) {
+            res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+        } else {
+            res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+        }
     }
 }));
 
