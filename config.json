@@ -2,27 +2,27 @@
   "_comment": "Конфигурация на бизнеса. Промени този файл за нов клиент — целият сайт се адаптира автоматично.",
 
   "business": {
-    "name": "Barbershop Halil",
-    "shortName": "HALIL BARBER",
-    "tagline": "Стилът, който заслужаваш",
-    "description": "Класическо бръснене и модерно подстригване в сърцето на Пловдив.",
-    "phone": "+359896109709",
-    "phoneDisplay": "089 610 9709",
-    "email": null,
+    "name": "Elite Barber Studio",
+    "shortName": "ELITE BARBER",
+    "tagline": "Стилът започва тук",
+    "description": "Модерно подстригване и класическо бръснене в сърцето на града.",
+    "phone": "+359888123456",
+    "phoneDisplay": "088 812 3456",
+    "email": "info@elitebarber.bg",
     "address": {
-      "street": "ул. Коматевско шосе 278",
-      "district": "кв. Коматево",
-      "city": "Пловдив",
-      "googleMapsQuery": "ул.+Коматевско+шосе+278,+Пловдив"
+      "street": "бул. Витоша 45",
+      "district": "Център",
+      "city": "София",
+      "googleMapsQuery": "бул.+Витоша+45,+София"
     },
     "social": {
-      "instagram": "#",
-      "facebook": "#",
-      "tiktok": "#"
+      "instagram": "https://instagram.com/krasikralev",
+      "facebook": "https://facebook.com/krasikralev",
+      "tiktok": "https://tiktok.com/@krasikralev"
     },
     "rating": {
-      "score": "5.0",
-      "count": 53
+      "score": "4.9",
+      "count": 127
     },
     "year": 2026
   },
@@ -43,28 +43,28 @@
     {
       "name": "Мъжко Подстригване",
       "price": 25,
-      "description": "Класическо или модерно, с внимание към детайла.",
+      "description": "Класическо или модерно, с внимание към всеки детайл.",
       "icon": "fas fa-cut",
       "featured": false
     },
     {
       "name": "Оформяне на Брада",
       "price": 15,
-      "description": "Подстригване, контуриране и терапия с топли кърпи.",
+      "description": "Прецизно оформяне, контуриране и терапия с топли кърпи.",
       "icon": "fas fa-user",
       "featured": false
     },
     {
       "name": "Пълен Пакет",
       "price": 35,
-      "description": "Подстригване + Брада + Измиване и стайлинг.",
+      "description": "Подстригване + Брада + Измиване и стайлинг. VIP третиране.",
       "icon": "fas fa-crown",
       "featured": true
     },
     {
       "name": "Детско Подстригване",
       "price": 20,
-      "description": "За малките джентълмени (до 12г).",
+      "description": "За малките джентълмени (до 12г). Търпение и усмивки.",
       "icon": "fas fa-child",
       "featured": false
     }
@@ -84,21 +84,21 @@
   },
 
   "booking": {
-    "confirmationPrefix": "HB",
+    "confirmationPrefix": "EB",
     "daysAhead": 14,
     "currency": "лв.",
     "phoneRegex": "^(\\+359|0)8[7-9][0-9]{7}$"
   },
 
   "seo": {
-    "title": "Barbershop Halil - Пловдив",
-    "description": "Най-доброто подстригване и оформяне на брада в Пловдив. Barbershop Halil - класическо бръснене, модерно подстригване. Запази час онлайн!",
-    "keywords": "бръснарница, подстригване, Пловдив, барбершоп, брада, мъжко подстригване, Халил",
-    "ogUrl": "https://halilbarber.com"
+    "title": "Elite Barber Studio - София | Онлайн Резервации",
+    "description": "Модерно подстригване и класическо бръснене в центъра на София. Elite Barber Studio — запази час онлайн за секунди!",
+    "keywords": "бръснарница, подстригване, София, барбершоп, брада, мъжко подстригване, online booking",
+    "ogUrl": "https://elitebarber.bg"
   },
 
   "admin": {
     "title": "Админ Панел",
-    "ownerName": "Халил"
+    "ownerName": "Админ"
   }
 }

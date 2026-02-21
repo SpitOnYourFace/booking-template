@@ -806,6 +806,11 @@ nav a.active {
     border: 1px solid #333;
 }
 
+.social-btn.github {
+    background: #24292e;
+    border: 1px solid #444;
+}
+
 .social-btn:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);

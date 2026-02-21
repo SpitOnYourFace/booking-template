@@ -471,9 +471,11 @@
                 // Social
                 const socialEl = document.getElementById('infoSocial');
                 socialEl.innerHTML = '';
-                if (cfg.business.social.instagram && cfg.business.social.instagram !== '#') socialEl.innerHTML += '<a href="' + cfg.business.social.instagram + '" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>';
-                if (cfg.business.social.facebook && cfg.business.social.facebook !== '#') socialEl.innerHTML += '<a href="' + cfg.business.social.facebook + '" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>';
-                if (cfg.business.social.tiktok && cfg.business.social.tiktok !== '#') socialEl.innerHTML += '<a href="' + cfg.business.social.tiktok + '" target="_blank" class="social-btn tiktok"><i class="fab fa-tiktok"></i></a>';
+                const socials = cfg.business.social || {};
+                if (socials.instagram && socials.instagram !== '#') socialEl.innerHTML += '<a href="' + socials.instagram + '" target="_blank" rel="noopener" class="social-btn instagram" title="Instagram"><i class="fab fa-instagram"></i></a>';
+                if (socials.facebook && socials.facebook !== '#') socialEl.innerHTML += '<a href="' + socials.facebook + '" target="_blank" rel="noopener" class="social-btn facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>';
+                if (socials.tiktok && socials.tiktok !== '#') socialEl.innerHTML += '<a href="' + socials.tiktok + '" target="_blank" rel="noopener" class="social-btn tiktok" title="TikTok"><i class="fab fa-tiktok"></i></a>';
+                if (socials.github) socialEl.innerHTML += '<a href="' + socials.github + '" target="_blank" rel="noopener" class="social-btn github" title="GitHub"><i class="fab fa-github"></i></a>';
 
                 // Footer
                 document.getElementById('footerText').innerHTML = '&copy; ' + cfg.business.year + ' ' + cfg.business.name + '. Всички права запазени.';
