@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="darkBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f1626"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="700" fill="url(#darkBg)"/>
+  
+  <!-- Sidebar -->
+  <rect x="0" y="0" width="240" height="700" fill="#1e1e32"/>
+  <text x="120" y="40" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#d4af37">✂ ELITE BARBER</text>
+  
+  <!-- Menu Items -->
+  <g transform="translate(20, 80)">
+    <rect x="0" y="0" width="200" height="45" rx="8" fill="rgba(212,175,55,0.15)"/>
+    <text x="15" y="28" font-family="Arial" font-size="14" fill="#d4af37">📥 Резервации</text>
+    
+    <text x="15" y="88" font-family="Arial" font-size="14" fill="#aaa">📅 График</text>
+    <text x="15" y="133" font-family="Arial" font-size="14" fill="#aaa">👑 Топ Клиенти</text>
+    <text x="15" y="178" font-family="Arial" font-size="14" fill="#aaa">🚫 Блокирани</text>
+  </g>
+  
+  <!-- Main Content Area -->
+  <rect x="240" y="0" width="960" height="70" fill="#1a1a2e"/>
+  <text x="280" y="45" font-family="Arial" font-size="24" font-weight="bold" fill="#d4af37">📥 Резервации</text>
+  <circle cx="1140" cy="35" r="12" fill="#FFAB00"/>
+  <text x="1140" y="40" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#111">3</text>
+  
+  <!-- Stats Cards -->
+  <g transform="translate(270, 90)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="280" height="100" rx="12" fill="#252540"/>
+    <text x="20" y="30" font-family="Arial" font-size="13" fill="#aaa">Чакащи</text>
+    <text x="20" y="65" font-family="Arial" font-size="36" font-weight="bold" fill="#FFCC00">3</text>
+    <circle cx="250" cy="25" r="18" fill="rgba(255,171,0,0.2)"/>
+    <text x="250" y="32" text-anchor="middle" font-family="Arial" font-size="16" fill="#FFCC00">⏱</text>
+    
+    <!-- Card 2 -->
+    <rect x="300" y="0" width="280" height="100" rx="12" fill="#252540"/>
+    <text x="320" y="30" font-family="Arial" font-size="13" fill="#aaa">Всички</text>
+    <text x="320" y="65" font-family="Arial" font-size="36" font-weight="bold" fill="#4DA6FF">21</text>
+    <circle cx="550" cy="25" r="18" fill="rgba(77,166,255,0.2)"/>
+    <text x="550" y="32" text-anchor="middle" font-family="Arial" font-size="16" fill="#4DA6FF">📋</text>
+    
+    <!-- Card 3 -->
+    <rect x="600" y="0" width="280" height="100" rx="12" fill="#252540"/>
+    <text x="620" y="30" font-family="Arial" font-size="13" fill="#aaa">Приходи</text>
+    <text x="620" y="65" font-family="Arial" font-size="32" font-weight="bold" fill="#00D68F">562 <tspan font-size="16">€</tspan></text>
+    <circle cx="850" cy="25" r="18" fill="rgba(0,214,143,0.2)"/>
+    <text x="850" y="32" text-anchor="middle" font-family="Arial" font-size="16" fill="#00D68F">💰</text>
+  </g>
+  
+  <!-- Chart Card -->
+  <rect x="270" y="220" width="900" height="200" rx="12" fill="#252540"/>
+  <text x="290" y="250" font-family="Arial" font-size="16" font-weight="bold" fill="#d4af37">📊 Резервации (Последни 7 дни)</text>
+  
+  <!-- Mini Chart -->
+  <g transform="translate(290, 270)">
+    <polyline points="0,100 120,75 240,90 360,60 480,70 600,45 720,55" fill="none" stroke="#d4af37" stroke-width="3"/>
+    <polyline points="0,100 120,75 240,90 360,60 480,70 600,45 720,55 720,130 0,130" fill="rgba(212,175,55,0.1)"/>
+    <!-- Dots -->
+    <circle cx="0" cy="100" r="4" fill="#d4af37"/>
+    <circle cx="120" cy="75" r="4" fill="#d4af37"/>
+    <circle cx="240" cy="90" r="4" fill="#d4af37"/>
+    <circle cx="360" cy="60" r="4" fill="#d4af37"/>
+    <circle cx="480" cy="70" r="4" fill="#d4af37"/>
+    <circle cx="600" cy="45" r="4" fill="#d4af37"/>
+    <circle cx="720" cy="55" r="4" fill="#d4af37"/>
+    
+    <!-- Labels -->
+    <text x="0" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Пон</text>
+    <text x="120" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Вто</text>
+    <text x="240" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Сря</text>
+    <text x="360" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Чет</text>
+    <text x="480" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Пет</text>
+    <text x="600" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Съб</text>
+    <text x="720" y="150" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">Нед</text>
+  </g>
+  
+  <!-- Table -->
+  <rect x="270" y="440" width="900" height="240" rx="12" fill="#252540"/>
+  <text x="290" y="470" font-family="Arial" font-size="16" font-weight="bold" fill="#fff">Последни Часове</text>
+  
+  <!-- Table Header -->
+  <g transform="translate(290, 485)">
+    <text x="0" y="0" font-family="Arial" font-size="11" font-weight="bold" fill="#d4af37">ЧАС</text>
+    <text x="120" y="0" font-family="Arial" font-size="11" font-weight="bold" fill="#d4af37">КЛИЕНТ</text>
+    <text x="320" y="0" font-family="Arial" font-size="11" font-weight="bold" fill="#d4af37">УСЛУГА</text>
+    <text x="520" y="0" font-family="Arial" font-size="11" font-weight="bold" fill="#d4af37">КОД</text>
+    <text x="630" y="0" font-family="Arial" font-size="11" font-weight="bold" fill="#d4af37">СТАТУС</text>
+  </g>
+  
+  <!-- Table Rows -->
+  <g transform="translate(290, 510)">
+    <!-- Row 1 - Pending -->
+    <rect x="0" y="0" width="860" height="40" rx="6" fill="rgba(255,255,255,0.02)"/>
+    <text x="10" y="25" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">15:00</text>
+    <text x="120" y="20" font-family="Arial" font-size="13" font-weight="600" fill="#fff">Николай Стоянов</text>
+    <text x="120" y="34" font-family="monospace" font-size="11" fill="#999">0879111222</text>
+    <text x="320" y="25" font-family="Arial" font-size="12" fill="#aaa">Оформяне на Брада</text>
+    <rect x="520" y="10" width="80" height="22" rx="5" fill="rgba(212,175,55,0.15)"/>
+    <text x="560" y="25" text-anchor="middle" font-family="monospace" font-size="11" fill="#d4af37">EB-1003</text>
+    <rect x="630" y="10" width="70" height="22" rx="5" fill="rgba(255,171,0,0.2)"/>
+    <text x="665" y="25" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#FFCC00">ЧАКА</text>
+    <rect x="720" y="8" width="60" height="26" rx="5" fill="rgba(0,214,143,0.2)"/>
+    <text x="750" y="26" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#00D68F">✓</text>
+    <rect x="790" y="8" width="60" height="26" rx="5" fill="rgba(255,61,113,0.2)"/>
+    <text x="820" y="26" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#FF3D71">✕</text>
+    
+    <!-- Row 2 - Confirmed -->
+    <rect x="0" y="50" width="860" height="40" rx="6" fill="rgba(255,255,255,0.02)"/>
+    <text x="10" y="75" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">10:00</text>
+    <text x="120" y="70" font-family="Arial" font-size="13" font-weight="600" fill="#fff">Георги Иванов</text>
+    <text x="120" y="84" font-family="monospace" font-size="11" fill="#999">0887123456</text>
+    <text x="320" y="75" font-family="Arial" font-size="12" fill="#aaa">Мъжко Подстригване</text>
+    <rect x="520" y="60" width="80" height="22" rx="5" fill="rgba(212,175,55,0.15)"/>
+    <text x="560" y="75" text-anchor="middle" font-family="monospace" font-size="11" fill="#d4af37">EB-1001</text>
+    <rect x="630" y="60" width="70" height="22" rx="5" fill="rgba(0,214,143,0.2)"/>
+    <text x="665" y="75" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#00E89F">ПРИЕТ</text>
+    
+    <!-- Row 3 - Confirmed -->
+    <rect x="0" y="100" width="860" height="40" rx="6" fill="rgba(255,255,255,0.02)"/>
+    <text x="10" y="125" font-family="Arial" font-size="13" font-weight="bold" fill="#fff">11:00</text>
+    <text x="120" y="120" font-family="Arial" font-size="13" font-weight="600" fill="#fff">Димитър Петров</text>
+    <text x="120" y="134" font-family="monospace" font-size="11" fill="#999">0898765432</text>
+    <text x="320" y="125" font-family="Arial" font-size="12" fill="#aaa">Пълен Пакет</text>
+    <rect x="520" y="110" width="80" height="22" rx="5" fill="rgba(212,175,55,0.15)"/>
+    <text x="560" y="125" text-anchor="middle" font-family="monospace" font-size="11" fill="#d4af37">EB-1002</text>
+    <rect x="630" y="110" width="70" height="22" rx="5" fill="rgba(0,214,143,0.2)"/>
+    <text x="665" y="125" text-anchor="middle" font-family="Arial" font-size="10" font-weight="bold" fill="#00E89F">ПРИЕТ</text>
+  </g>
+</svg>

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a"/>
+      <stop offset="100%" style="stop-color:#111"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  
+  <!-- Modal -->
+  <rect x="200" y="50" width="800" height="600" rx="20" fill="#222" stroke="#444" stroke-width="2"/>
+  
+  <!-- Modal Header -->
+  <text x="600" y="100" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#d4af37">Запази час</text>
+  <text x="600" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#aaa">Избрана услуга: Пълен Пакет (18 €)</text>
+  
+  <!-- Progress Steps -->
+  <g transform="translate(300, 160)">
+    <circle cx="100" cy="0" r="20" fill="#d4af37" stroke="#d4af37" stroke-width="2"/>
+    <text x="100" y="6" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#111">1</text>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial" font-size="11" fill="#d4af37">Дата</text>
+    
+    <line x1="130" y1="0" x2="170" y2="0" stroke="#555" stroke-width="2"/>
+    
+    <circle cx="200" cy="0" r="20" fill="#333" stroke="#555" stroke-width="2"/>
+    <text x="200" y="6" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#aaa">2</text>
+    <text x="200" y="30" text-anchor="middle" font-family="Arial" font-size="11" fill="#aaa">Час</text>
+    
+    <line x1="230" y1="0" x2="270" y2="0" stroke="#555" stroke-width="2"/>
+    
+    <circle cx="300" cy="0" r="20" fill="#333" stroke="#555" stroke-width="2"/>
+    <text x="300" y="6" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#aaa">3</text>
+    <text x="300" y="30" text-anchor="middle" font-family="Arial" font-size="11" fill="#aaa">Данни</text>
+  </g>
+  
+  <!-- Date Scroller Label -->
+  <text x="230" y="240" font-family="Arial" font-size="13" font-weight="bold" fill="#d4af37">ИЗБЕРИ ДАТА:</text>
+  
+  <!-- Date Cards -->
+  <g transform="translate(230, 260)">
+    <rect x="0" y="0" width="80" height="70" rx="10" fill="#333" stroke="#444"/>
+    <text x="40" y="25" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">Днес</text>
+    <text x="40" y="50" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#fff">21</text>
+    <text x="40" y="65" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">ФЕВ</text>
+    
+    <rect x="95" y="0" width="80" height="70" rx="10" fill="none" stroke="#d4af37" stroke-width="2"/>
+    <rect x="97" y="2" width="76" height="66" rx="8" fill="linear-gradient(135deg, #d4af37, #b8962e)"/>
+    <text x="135" y="25" text-anchor="middle" font-family="Arial" font-size="10" fill="#222">Утре</text>
+    <text x="135" y="50" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#111">22</text>
+    <text x="135" y="65" text-anchor="middle" font-family="Arial" font-size="9" fill="#333">ФЕВ</text>
+    
+    <rect x="190" y="0" width="80" height="70" rx="10" fill="#333" stroke="#444"/>
+    <text x="230" y="25" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">Съб</text>
+    <text x="230" y="50" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#fff">23</text>
+    <text x="230" y="65" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">ФЕВ</text>
+    
+    <rect x="285" y="0" width="80" height="70" rx="10" fill="#333" stroke="#444"/>
+    <text x="325" y="25" text-anchor="middle" font-family="Arial" font-size="10" fill="#888">Нед</text>
+    <text x="325" y="50" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#fff">24</text>
+    <text x="325" y="65" text-anchor="middle" font-family="Arial" font-size="9" fill="#666">ФЕВ</text>
+  </g>
+  
+  <!-- Time Slots Grid -->
+  <text x="230" y="370" font-family="Arial" font-size="13" font-weight="bold" fill="#aaa">Избери час:</text>
+  <g transform="translate(230, 390)">
+    <!-- Row 1 -->
+    <rect x="0" y="0" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="55" y="28" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">10:00</text>
+    
+    <rect x="125" y="0" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="180" y="28" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">10:30</text>
+    
+    <rect x="250" y="0" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="305" y="28" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">11:00</text>
+    
+    <rect x="375" y="0" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="430" y="28" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">11:30</text>
+    
+    <rect x="500" y="0" width="110" height="45" rx="8" fill="#1a1a1a" stroke="#333"/>
+    <text x="555" y="28" text-anchor="middle" font-family="Arial" font-size="15" fill="#555" text-decoration="line-through">12:00</text>
+    
+    <!-- Row 2 -->
+    <rect x="0" y="55" width="110" height="45" rx="8" fill="linear-gradient(135deg, #d4af37, #b8962e)" stroke="#d4af37" stroke-width="2"/>
+    <text x="55" y="83" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold" fill="#111">15:00</text>
+    
+    <rect x="125" y="55" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="180" y="83" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">15:30</text>
+    
+    <rect x="250" y="55" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="305" y="83" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">16:00</text>
+    
+    <rect x="375" y="55" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="430" y="83" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">16:30</text>
+    
+    <rect x="500" y="55" width="110" height="45" rx="8" fill="#333" stroke="#444"/>
+    <text x="555" y="83" text-anchor="middle" font-family="Arial" font-size="15" fill="#fff">17:00</text>
+  </g>
+  
+  <!-- Footer Note -->
+  <text x="600" y="630" text-anchor="middle" font-family="Arial" font-size="12" fill="#666">След избор на час ще се покажат полета за име и телефон</text>
+</svg>
