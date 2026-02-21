@@ -652,6 +652,39 @@ app.post('/api/check-phone', (req, res) => {
     });
 });
 
+// API: Admin - Chart data (last 7 days bookings)
+app.get('/api/admin/chart-data', requireAuth, (req, res) => {
+    const last7Days = [];
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        last7Days.push(d.toISOString().split('T')[0]);
+    }
+
+    const dayNames = ['Нед', 'Пон', 'Вто', 'Сря', 'Чет', 'Пет', 'Съб'];
+    const placeholders = last7Days.map(() => '?').join(',');
+    
+    db.all(
+        `SELECT date, COUNT(*) as count FROM bookings WHERE date IN (${placeholders}) GROUP BY date`,
+        last7Days,
+        (err, rows) => {
+            if (err) return res.status(500).json({ error: err.message });
+            
+            const countMap = {};
+            (rows || []).forEach(r => { countMap[r.date] = r.count; });
+            
+            const labels = last7Days.map(d => {
+                const dayIndex = new Date(d + 'T00:00:00').getDay();
+                return dayNames[dayIndex];
+            });
+            
+            const values = last7Days.map(d => countMap[d] || 0);
+            
+            res.json({ labels, values });
+        }
+    );
+});
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
     console.log(`Admin panel: http://localhost:${PORT}/admin.html`);

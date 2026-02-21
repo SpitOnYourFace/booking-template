@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     </noscript>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
 </head>
 <body>
     <!-- Login Modal -->
@@ -139,6 +141,24 @@
                     </div>
                 </div>
 
+                <!-- Chart -->
+                <div class="card large-card" style="margin-bottom: 20px; padding: 20px;">
+                    <div class="card-header">
+                        <h2><i class="fas fa-chart-line" style="margin-right: 8px; color: #d4af37;"></i>Резервации (Последни 7 дни)</h2>
+                    </div>
+                    <div style="position: relative; height: 200px; margin-top: 15px;">
+                        <canvas id="bookingChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bulk Actions Bar -->
+                <div id="bulkActions" style="display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--sidebar-bg, #1e1e32); border: 1px solid var(--border-color, #333); border-radius: 14px; padding: 14px 24px; display: none; align-items: center; gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 1500;">
+                    <span id="selectedCount" style="color: #d4af37; font-weight: 600; font-size: 14px;">0 избрани</span>
+                    <button class="action-btn-lg btn-confirm" onclick="bulkAction('confirm')"><i class="fas fa-check"></i> Потвърди</button>
+                    <button class="action-btn-lg btn-reject" onclick="bulkAction('reject')"><i class="fas fa-times"></i> Откажи</button>
+                    <button class="action-btn-lg" style="background: rgba(255,255,255,0.05); color: #888;" onclick="clearSelection()"><i class="fas fa-times"></i></button>
+                </div>
+
                 <!-- Appointments Table -->
                 <div class="content-grid">
                     <div class="card large-card">
@@ -150,6 +170,7 @@
                             <table class="dark-table">
                                 <thead>
                                     <tr>
+                                        <th style="width: 40px;"><input type="checkbox" id="selectAll" onchange="toggleSelectAll(this)" style="cursor:pointer;"></th>
                                         <th>Час</th>
                                         <th>Клиент</th>
                                         <th>Услуга</th>
@@ -159,7 +180,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
-                                    <tr><td colspan="6" style="text-align:center;">Зареждане...</td></tr>
+                                    <tr><td colspan="7" style="text-align:center;">Зареждане...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -1393,7 +1414,7 @@
                 let pending = 0;
 
                 if (data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">Няма резултати.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Няма резултати.</td></tr>';
                 } else {
                     data.forEach(app => {
                         if(app.status === 'pending') pending++;
@@ -1424,8 +1445,10 @@
                         if(app.status === 'rejected') { statusClass = 'badge-rejected'; statusText = 'Отказан'; }
 
                         const confirmCode = app.confirmationCode || '-';
+                        const isChecked = selectedIds.has(app.id) ? 'checked' : '';
 
                         row.innerHTML = `
+                            <td><input type="checkbox" class="row-checkbox" data-id="${app.id}" ${isChecked} onchange="toggleRowSelect(this)" style="cursor:pointer;"></td>
                             <td data-label="Час">
                                 <div style="color: var(--text-main); font-weight: 600;">${escapeHtml(app.time)}</div>
                                 <div style="font-size: 11px; opacity: 0.7;">${escapeHtml(app.date)}</div>
@@ -1458,6 +1481,9 @@
                     const statData = await statRes.json();
                     document.getElementById('statRevenue').innerHTML = `${statData.revenue || 0} <small>лв.</small>`;
                 }
+
+                // Load Chart
+                loadBookingChart();
 
             } catch (e) {
                 console.error(e);
@@ -1714,6 +1740,118 @@
             }
 
             if (refreshBtn) refreshBtn.classList.remove('loading');
+        }
+
+        // ========== Chart ==========
+        let bookingChart = null;
+        async function loadBookingChart() {
+            try {
+                const res = await fetch('/api/admin/chart-data', { credentials: 'include' });
+                if (!res.ok) return;
+                const data = await res.json();
+                
+                const ctx = document.getElementById('bookingChart');
+                if (!ctx) return;
+                
+                if (bookingChart) bookingChart.destroy();
+                
+                if (typeof Chart === 'undefined') {
+                    setTimeout(loadBookingChart, 500);
+                    return;
+                }
+                
+                bookingChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Резервации',
+                            data: data.values,
+                            borderColor: '#d4af37',
+                            backgroundColor: 'rgba(212, 175, 55, 0.08)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 2,
+                            pointBackgroundColor: '#d4af37',
+                            pointBorderColor: '#d4af37',
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: { stepSize: 1, color: '#666', font: { size: 11 } },
+                                grid: { color: 'rgba(255,255,255,0.04)' }
+                            },
+                            x: {
+                                ticks: { color: '#888', font: { size: 12 } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+            } catch(e) { console.error('Chart error:', e); }
+        }
+
+        // ========== Bulk Actions ==========
+        let selectedIds = new Set();
+
+        function toggleSelectAll(checkbox) {
+            document.querySelectorAll('.row-checkbox').forEach(cb => {
+                cb.checked = checkbox.checked;
+                if (checkbox.checked) selectedIds.add(parseInt(cb.dataset.id));
+                else selectedIds.delete(parseInt(cb.dataset.id));
+            });
+            updateBulkBar();
+        }
+
+        function toggleRowSelect(checkbox) {
+            const id = parseInt(checkbox.dataset.id);
+            if (checkbox.checked) selectedIds.add(id);
+            else selectedIds.delete(id);
+            updateBulkBar();
+        }
+
+        function updateBulkBar() {
+            const bar = document.getElementById('bulkActions');
+            if (selectedIds.size > 0) {
+                bar.style.display = 'flex';
+                document.getElementById('selectedCount').textContent = selectedIds.size + ' избрани';
+            } else {
+                bar.style.display = 'none';
+            }
+        }
+
+        function clearSelection() {
+            selectedIds.clear();
+            document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = false);
+            document.getElementById('selectAll').checked = false;
+            updateBulkBar();
+        }
+
+        async function bulkAction(action) {
+            if (!confirm((action === 'confirm' ? 'Потвърди' : 'Откажи') + ' ' + selectedIds.size + ' резервации?')) return;
+            
+            for (const id of selectedIds) {
+                await fetch('/api/admin/action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ id, action })
+                });
+            }
+            
+            selectedIds.clear();
+            updateBulkBar();
+            document.getElementById('selectAll').checked = false;
+            loadAppointments();
         }
 
         // Initialize
