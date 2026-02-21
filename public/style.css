@@ -376,16 +376,12 @@ nav a.active {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    border-radius: 20px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent 50%, rgba(212, 175, 55, 0.1));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    height: 4px;
+    background: linear-gradient(90deg, #c41e3a, #fff, #1e90ff);
     opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
+    transition: opacity 0.3s;
+    box-shadow: 0 0 15px rgba(196, 30, 58, 0.4), 0 0 15px rgba(30, 144, 255, 0.4);
+    z-index: 1;
 }
 
 .service-card:hover {
@@ -405,7 +401,8 @@ nav a.active {
 
 .service-card.featured::before {
     opacity: 1;
-    background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), transparent 60%, rgba(240, 216, 117, 0.2));
+    background: linear-gradient(90deg, #d4af37, #f0d875, #d4af37);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
 }
 
 .featured-badge {
