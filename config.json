@@ -42,28 +42,28 @@
   "services": [
     {
       "name": "Мъжко Подстригване",
-      "price": 25,
+      "price": 13,
       "description": "Класическо или модерно, с внимание към всеки детайл.",
       "icon": "fas fa-cut",
       "featured": false
     },
     {
       "name": "Оформяне на Брада",
-      "price": 15,
+      "price": 8,
       "description": "Прецизно оформяне, контуриране и терапия с топли кърпи.",
       "icon": "fas fa-user",
       "featured": false
     },
     {
       "name": "Пълен Пакет",
-      "price": 35,
+      "price": 18,
       "description": "Подстригване + Брада + Измиване и стайлинг. VIP третиране.",
       "icon": "fas fa-crown",
       "featured": true
     },
     {
       "name": "Детско Подстригване",
-      "price": 20,
+      "price": 10,
       "description": "За малките джентълмени (до 12г). Търпение и усмивки.",
       "icon": "fas fa-child",
       "featured": false
@@ -86,7 +86,7 @@
   "booking": {
     "confirmationPrefix": "EB",
     "daysAhead": 14,
-    "currency": "лв.",
+    "currency": "€",
     "phoneRegex": "^(\\+359|0)8[7-9][0-9]{7}$"
   },
 
