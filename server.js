@@ -419,7 +419,7 @@ app.get('/api/admin/appointments', requireAuth, (req, res) => {
     let params = [];
 
     if (search && search.trim()) {
-        query += " WHERE clientName LIKE ? OR clientPhone LIKE ? OR confirmationCode LIKE ? OR clientEmail LIKE ? OR date LIKE ?";
+        query += " WHERE clientName LIKE ? COLLATE NOCASE OR clientPhone LIKE ? OR confirmationCode LIKE ? COLLATE NOCASE OR clientEmail LIKE ? COLLATE NOCASE OR date LIKE ?";
         const searchTerm = `%${search.trim()}%`;
         params = [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm];
     }
