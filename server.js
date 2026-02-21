@@ -67,11 +67,12 @@ app.use(session({
 }));
 
 app.use(express.static(path.join(__dirname, 'public'), {
-    maxAge: '7d',
+    maxAge: '0',
     setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.html')) {
-            res.setHeader('Cache-Control', 'no-cache');
-        }
+        // No caching for any static files during development
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
     }
 }));
 
