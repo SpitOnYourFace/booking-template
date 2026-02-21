@@ -424,7 +424,8 @@ app.get('/api/admin/appointments', requireAuth, (req, res) => {
         params = [searchTerm, searchTerm, searchTerm, searchTerm, searchTerm];
     }
 
-    query += " ORDER BY createdAt DESC, id DESC LIMIT 100";
+    // Sort: pending first, then confirmed, then rejected, then by date DESC
+    query += " ORDER BY CASE status WHEN 'pending' THEN 0 WHEN 'confirmed' THEN 1 ELSE 2 END, date DESC, time DESC LIMIT 100";
 
     db.all(query, params, (err, rows) => {
         if (err) return res.status(500).json({ error: err.message });
