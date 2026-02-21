@@ -125,6 +125,56 @@ db.serialize(() => {
     db.run("CREATE INDEX IF NOT EXISTS idx_appt_phone ON appointments(clientPhone)");
     db.run("CREATE INDEX IF NOT EXISTS idx_appt_code ON appointments(confirmationCode)");
 
+    // Seed demo data (only if DB is empty)
+    db.get("SELECT COUNT(*) as count FROM appointments", [], (err, row) => {
+        if (err || (row && row.count > 0)) return;
+        
+        const today = new Date();
+        const fmt = (d) => d.toISOString().split('T')[0];
+        const d0 = fmt(today);
+        const d1 = fmt(new Date(today.getTime() + 86400000));
+        const d2 = fmt(new Date(today.getTime() + 2 * 86400000));
+        const dm1 = fmt(new Date(today.getTime() - 86400000));
+        const dm2 = fmt(new Date(today.getTime() - 2 * 86400000));
+        const dm3 = fmt(new Date(today.getTime() - 3 * 86400000));
+        const dm4 = fmt(new Date(today.getTime() - 4 * 86400000));
+        const dm5 = fmt(new Date(today.getTime() - 5 * 86400000));
+
+        const prefix = config.booking.confirmationPrefix || 'EB';
+        const seed = [
+            // Днес — микс от pending и confirmed
+            [d0, '10:00', 'Мъжко Подстригване', 25, 'Георги Иванов', '0887123456', 'georgi@mail.bg', 'confirmed', prefix + '-1001'],
+            [d0, '11:00', 'Пълен Пакет', 35, 'Димитър Петров', '0898765432', null, 'confirmed', prefix + '-1002'],
+            [d0, '15:00', 'Оформяне на Брада', 15, 'Николай Стоянов', '0879111222', null, 'pending', prefix + '-1003'],
+            [d0, '16:30', 'Мъжко Подстригване', 25, 'Александър Тодоров', '0888333444', 'alex.t@gmail.com', 'pending', prefix + '-1004'],
+            [d0, '17:30', 'Детско Подстригване', 20, 'Мария Колева', '0897555666', null, 'pending', prefix + '-1005'],
+            // Утре
+            [d1, '10:30', 'Пълен Пакет', 35, 'Стефан Георгиев', '0887222333', 'stefan.g@abv.bg', 'confirmed', prefix + '-1006'],
+            [d1, '12:00', 'Мъжко Подстригване', 25, 'Красимир Димитров', '0878444555', null, 'pending', prefix + '-1007'],
+            [d1, '15:30', 'Оформяне на Брада', 15, 'Иван Маринов', '0889666777', null, 'confirmed', prefix + '-1008'],
+            // Вдругиден
+            [d2, '11:00', 'Пълен Пакет', 35, 'Петър Николов', '0897888999', 'peter.n@mail.bg', 'pending', prefix + '-1009'],
+            // Минали дни (за chart-а)
+            [dm1, '10:00', 'Мъжко Подстригване', 25, 'Тодор Василев', '0887111000', null, 'confirmed', prefix + '-0901'],
+            [dm1, '11:30', 'Пълен Пакет', 35, 'Борис Христов', '0898222111', null, 'confirmed', prefix + '-0902'],
+            [dm1, '16:00', 'Оформяне на Брада', 15, 'Калоян Атанасов', '0879333222', null, 'confirmed', prefix + '-0903'],
+            [dm2, '10:30', 'Мъжко Подстригване', 25, 'Васил Добрев', '0888444333', null, 'confirmed', prefix + '-0904'],
+            [dm2, '15:00', 'Пълен Пакет', 35, 'Емил Стоев', '0897555444', null, 'confirmed', prefix + '-0905'],
+            [dm3, '11:00', 'Детско Подстригване', 20, 'Анна Попова', '0887666555', null, 'confirmed', prefix + '-0906'],
+            [dm3, '12:00', 'Мъжко Подстригване', 25, 'Мартин Ковачев', '0898777666', null, 'confirmed', prefix + '-0907'],
+            [dm3, '16:30', 'Оформяне на Брада', 15, 'Христо Йорданов', '0879888777', null, 'rejected', prefix + '-0908'],
+            [dm4, '10:00', 'Пълен Пакет', 35, 'Даниел Кръстев', '0888999888', null, 'confirmed', prefix + '-0909'],
+            [dm4, '15:30', 'Мъжко Подстригване', 25, 'Пламен Костов', '0897000999', null, 'confirmed', prefix + '-0910'],
+            [dm5, '11:30', 'Мъжко Подстригване', 25, 'Радослав Генчев', '0887111222', null, 'confirmed', prefix + '-0911'],
+            [dm5, '17:00', 'Пълен Пакет', 35, 'Ивайло Методиев', '0898222333', null, 'confirmed', prefix + '-0912'],
+        ];
+
+        const stmt = db.prepare("INSERT INTO appointments (date, time, service, price, clientName, clientPhone, clientEmail, status, confirmationCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        seed.forEach(row => stmt.run(row));
+        stmt.finalize();
+        console.log('Demo seed data: ' + seed.length + ' appointments inserted');
+    });
+
     // Migrations for existing databases
     db.all("PRAGMA table_info(appointments)", (err, columns) => {
         if (err) {
