@@ -66,6 +66,66 @@ app.use(session({
     }
 }));
 
+// Server-side OG meta tag injection (crawlers don't execute JS)
+const fs = require('fs');
+
+function injectOgMeta(htmlFile, overrides = {}) {
+    const filePath = path.join(__dirname, 'public', htmlFile);
+    let html = fs.readFileSync(filePath, 'utf8');
+    const ogUrl = config.seo.ogUrl || '';
+    const replacements = {
+        'og:title': overrides.ogTitle || config.seo.title,
+        'og:description': overrides.ogDescription || config.seo.description,
+        'og:image': `${ogUrl}/og-image.png`,
+        'og:url': overrides.ogUrl || ogUrl,
+        'og:site_name': config.business.name,
+        'twitter:title': overrides.twTitle || config.seo.title,
+        'twitter:description': overrides.twDescription || config.seo.description,
+    };
+    // Replace OG meta tags with empty content
+    for (const [prop, value] of Object.entries(replacements)) {
+        const isOg = prop.startsWith('og:');
+        const attr = isOg ? 'property' : 'name';
+        const regex = new RegExp(`<meta ${attr}="${prop}"[^>]*content=""[^>]*>`, 'g');
+        html = html.replace(regex, `<meta ${attr}="${prop}" id="${prop.replace(':', '').replace('twitter', 'tw')}" content="${value}">`);
+    }
+    // Add og:image dimensions and twitter:image after twitter:description
+    if (!html.includes('og:image:width')) {
+        html = html.replace(
+            /(<meta property="og:image"[^>]*>)/,
+            '$1\n    <meta property="og:image:width" content="1200">\n    <meta property="og:image:height" content="630">'
+        );
+    }
+    if (!html.includes('twitter:image')) {
+        html = html.replace(
+            /(<meta name="twitter:description"[^>]*>)/,
+            `$1\n    <meta name="twitter:image" content="${ogUrl}/og-image.png">`
+        );
+    }
+    return html;
+}
+
+app.get('/', (req, res) => {
+    const html = injectOgMeta('index.html');
+    res.type('html').send(html);
+});
+
+app.get('/index.html', (req, res) => {
+    const html = injectOgMeta('index.html');
+    res.type('html').send(html);
+});
+
+app.get('/admin.html', (req, res) => {
+    const html = injectOgMeta('admin.html', {
+        ogTitle: `${config.admin.title} - ${config.business.name}`,
+        ogDescription: `Админ панел за управление на ${config.business.name}.`,
+        twTitle: `${config.admin.title} - ${config.business.name}`,
+        twDescription: `Админ панел за управление на ${config.business.name}.`,
+        ogUrl: `${config.seo.ogUrl}/admin.html`
+    });
+    res.type('html').send(html);
+});
+
 app.use(express.static(path.join(__dirname, 'public'), {
     maxAge: '0',
     etag: true,
