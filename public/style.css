@@ -954,3 +954,92 @@ input:focus {
     .gallery-strip { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; }
     .gallery-img { min-width: 70%; scroll-snap-align: start; height: 180px; }
 }
+
+/* ═══ Stylist Selection ═══ */
+.stylist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 10px 0 20px;
+}
+
+.stylist-option {
+    background: rgba(232,160,191,0.05);
+    border: 1px solid rgba(232,160,191,0.12);
+    border-radius: 14px;
+    padding: 18px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.stylist-option:hover {
+    border-color: var(--primary);
+    background: rgba(232,160,191,0.1);
+    transform: translateY(-3px);
+}
+
+.stylist-option.any-stylist {
+    border-style: dashed;
+}
+
+.stylist-emoji {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.stylist-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.stylist-role {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.step-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 15px;
+    padding: 6px 0;
+    transition: opacity 0.2s;
+}
+
+.step-back:hover { opacity: 0.7; }
+
+/* ═══ Floating Book Button ═══ */
+.floating-book-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gradient);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 4px 25px var(--primary-glow);
+    z-index: 999;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.floating-book-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 35px rgba(232,160,191,0.5);
+}
+
+@media (max-width: 768px) {
+    .stylist-grid { grid-template-columns: repeat(2, 1fr); }
+    .floating-book-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 20px; }
+}

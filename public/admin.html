@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="adminPageTitle">Админ Панел</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💈</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💅</text></svg>">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -36,7 +36,7 @@
     <div id="loginModal" class="login-modal">
         <div class="login-container">
             <div class="login-header">
-                <i class="fas fa-cut"></i>
+                <i class="fas fa-spa"></i>
                 <h1 id="loginTitle">...</h1>
                 <p id="loginSubtitle">Админ Панел</p>
             </div>
@@ -62,7 +62,7 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="logo">
-                <i class="fas fa-cut"></i>
+                <i class="fas fa-spa"></i>
                 <span id="sidebarBrand">...</span>
             </div>
             <nav class="menu">
@@ -117,7 +117,7 @@
             <!-- Dashboard Content -->
             <div id="view-dashboard" class="dashboard">
                 <div class="page-header">
-                    <h1><i class="fas fa-inbox" style="margin-right: 10px; color: #d4af37;"></i>Резервации</h1>
+                    <h1><i class="fas fa-inbox" style="margin-right: 10px; color: #E8A0BF;"></i>Резервации</h1>
                     <button class="btn-primary" onclick="loadAppointments()" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
                 </div>
 
@@ -158,7 +158,7 @@
                 <!-- Chart -->
                 <div class="card large-card" style="margin-bottom: 20px; padding: 20px;">
                     <div class="card-header">
-                        <h2><i class="fas fa-chart-line" style="margin-right: 8px; color: #d4af37;"></i>Резервации (Последни 7 дни)</h2>
+                        <h2><i class="fas fa-chart-line" style="margin-right: 8px; color: #E8A0BF;"></i>Резервации (Последни 7 дни)</h2>
                     </div>
                     <div style="position: relative; height: 200px; margin-top: 15px;">
                         <canvas id="bookingChart"></canvas>
@@ -167,7 +167,7 @@
 
                 <!-- Bulk Actions Bar -->
                 <div id="bulkActions" style="display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--sidebar-bg, #1e1e32); border: 1px solid var(--border-color, #333); border-radius: 14px; padding: 14px 24px; display: none; align-items: center; gap: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 1500;">
-                    <span id="selectedCount" style="color: #d4af37; font-weight: 600; font-size: 14px;">0 избрани</span>
+                    <span id="selectedCount" style="color: #E8A0BF; font-weight: 600; font-size: 14px;">0 избрани</span>
                     <button class="action-btn-lg btn-confirm" onclick="bulkAction('confirm')"><i class="fas fa-check"></i> Потвърди</button>
                     <button class="action-btn-lg btn-reject" onclick="bulkAction('reject')"><i class="fas fa-times"></i> Откажи</button>
                     <button class="action-btn-lg" style="background: rgba(255,255,255,0.05); color: #888;" onclick="clearSelection()"><i class="fas fa-times"></i></button>
@@ -188,6 +188,7 @@
                                         <th>Час</th>
                                         <th>Клиент</th>
                                         <th>Услуга</th>
+                                        <th>Специалист</th>
                                         <th>Код</th>
                                         <th>Статус</th>
                                         <th>Действие</th>
@@ -206,13 +207,13 @@
             <!-- Schedule Content (Hidden by default) -->
             <div id="view-schedule" class="dashboard" style="display: none;">
                 <div class="page-header">
-                    <h1><i class="fas fa-calendar-alt" style="margin-right: 10px; color: #d4af37;"></i>Дневен График</h1>
+                    <h1><i class="fas fa-calendar-alt" style="margin-right: 10px; color: #E8A0BF;"></i>Дневен График</h1>
                     <div class="schedule-controls" style="display: flex; gap: 10px; align-items: center;">
                         <button class="btn-secondary" onclick="changeScheduleDate(-1)"><i class="fas fa-chevron-left"></i></button>
                         <div class="custom-datepicker" id="customDatepicker">
                             <input type="hidden" id="scheduleDate">
                             <button type="button" class="datepicker-trigger" onclick="toggleCalendar(event)">
-                                <i class="fas fa-calendar-alt" style="color: #d4af37;"></i>
+                                <i class="fas fa-calendar-alt" style="color: #E8A0BF;"></i>
                                 <span id="scheduleDateDisplay">--</span>
                                 <i class="fas fa-chevron-down" style="font-size: 10px; opacity: 0.5;"></i>
                             </button>
@@ -244,7 +245,7 @@
             <!-- Clients Content (Hidden by default) -->
             <div id="view-clients" class="dashboard" style="display: none;">
                 <div class="page-header">
-                    <h1><i class="fas fa-crown" style="margin-right: 10px; color: #d4af37;"></i>Топ Клиенти</h1>
+                    <h1><i class="fas fa-crown" style="margin-right: 10px; color: #E8A0BF;"></i>Топ Клиенти</h1>
                     <button class="btn-primary" onclick="loadClients()" id="refreshClientsBtn"><i class="fas fa-sync-alt"></i></button>
                 </div>
 
@@ -350,7 +351,7 @@
 
         .login-header i {
             font-size: 48px;
-            color: #d4af37;
+            color: #E8A0BF;
             margin-bottom: 15px;
         }
 
@@ -390,14 +391,14 @@
 
         .login-modal input:focus {
             outline: none;
-            border-color: #d4af37;
+            border-color: #E8A0BF;
             background: rgba(255, 255, 255, 0.08);
         }
 
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #d4af37, #b8962e);
+            background: linear-gradient(135deg, #E8A0BF, #b8962e);
             border: none;
             border-radius: 10px;
             color: #1a1a2e;
@@ -434,7 +435,7 @@
         .profile-avatar {
             width: 36px;
             height: 36px;
-            background: linear-gradient(135deg, #d4af37, #b8962e);
+            background: linear-gradient(135deg, #E8A0BF, #b8962e);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -460,7 +461,7 @@
             text-align: left;
             padding: 12px 15px;
             border-bottom: 2px solid #444;
-            color: #d4af37;
+            color: #E8A0BF;
             font-weight: 700;
             font-size: 12px;
             text-transform: uppercase;
@@ -501,7 +502,7 @@
             font-family: monospace;
             font-size: 12px;
             background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
+            color: #E8A0BF;
             padding: 5px 10px;
             border-radius: 6px;
             border: 1px solid rgba(212, 175, 55, 0.2);
@@ -547,7 +548,7 @@
         .btn-reject { background: rgba(255, 61, 113, 0.2); color: #FF3D71; }
         .btn-reject:hover:not(:disabled) { background: #FF3D71; color: white; }
 
-        .btn-edit { background: none; color: #d4af37; font-size: 14px; padding: 0; width: auto; height: auto; margin-left: 5px; cursor: pointer; border: none; }
+        .btn-edit { background: none; color: #E8A0BF; font-size: 14px; padding: 0; width: auto; height: auto; margin-left: 5px; cursor: pointer; border: none; }
         .btn-edit:hover { color: white; }
 
         .btn-block { background: rgba(255, 61, 113, 0.15); color: #FF3D71; padding: 4px 10px; border-radius: 6px; border: none; cursor: pointer; font-size: 11px; font-weight: 600; transition: all 0.2s; }
@@ -580,7 +581,7 @@
             border-bottom: 1px solid var(--border-color);
             font-weight: 600;
             font-size: 14px;
-            color: #d4af37;
+            color: #E8A0BF;
         }
         .notif-refresh {
             background: none;
@@ -591,7 +592,7 @@
             padding: 4px;
             transition: color 0.2s;
         }
-        .notif-refresh:hover { color: #d4af37; }
+        .notif-refresh:hover { color: #E8A0BF; }
         .notif-list {
             overflow-y: auto;
             max-height: 360px;
@@ -681,7 +682,7 @@
         }
 
         .schedule-slot:hover {
-            border-color: #d4af37;
+            border-color: #E8A0BF;
         }
 
         .schedule-slot.free {
@@ -700,7 +701,7 @@
         .slot-time {
             font-size: 24px;
             font-weight: 700;
-            color: #d4af37;
+            color: #E8A0BF;
             margin-bottom: 10px;
         }
 
@@ -738,8 +739,8 @@
         }
 
         .btn-secondary:hover {
-            border-color: #d4af37;
-            color: #d4af37;
+            border-color: #E8A0BF;
+            color: #E8A0BF;
         }
         /* Schedule controls responsive */
         .schedule-controls {
@@ -830,8 +831,8 @@
         }
 
         .datepicker-trigger:hover {
-            border-color: #d4af37;
-            color: #d4af37;
+            border-color: #E8A0BF;
+            color: #E8A0BF;
         }
 
         .calendar-dropdown {
@@ -862,7 +863,7 @@
 
         .calendar-title {
             font-weight: 600;
-            color: #d4af37;
+            color: #E8A0BF;
             font-size: 15px;
         }
 
@@ -882,8 +883,8 @@
         }
 
         .calendar-nav:hover {
-            border-color: #d4af37;
-            color: #d4af37;
+            border-color: #E8A0BF;
+            color: #E8A0BF;
         }
 
         .calendar-weekdays {
@@ -926,16 +927,16 @@
 
         .calendar-day:hover {
             background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
+            color: #E8A0BF;
         }
 
         .calendar-day.today {
             border: 1px solid rgba(212, 175, 55, 0.5);
-            color: #d4af37;
+            color: #E8A0BF;
         }
 
         .calendar-day.selected {
-            background: linear-gradient(135deg, #d4af37, #b8962e);
+            background: linear-gradient(135deg, #E8A0BF, #b8962e);
             color: #1a1a2e;
             font-weight: 700;
         }
@@ -957,7 +958,7 @@
 
         .calendar-today-btn {
             background: rgba(212, 175, 55, 0.15);
-            color: #d4af37;
+            color: #E8A0BF;
             border: 1px solid rgba(212, 175, 55, 0.3);
             padding: 6px 20px;
             border-radius: 6px;
@@ -969,7 +970,7 @@
         }
 
         .calendar-today-btn:hover {
-            background: #d4af37;
+            background: #E8A0BF;
             color: #1a1a2e;
         }
 
@@ -1132,6 +1133,7 @@
                 document.getElementById('loginSubtitle').textContent = cfg.admin.title;
                 document.getElementById('sidebarBrand').textContent = cfg.business.shortName;
                 document.getElementById('profileName').textContent = cfg.admin.ownerName;
+                if (cfg.workHours && cfg.workHours.slots) WORK_HOURS = cfg.workHours.slots;
             } catch(e) { console.error('Config load failed:', e); }
         }
         loadAdminConfig();
@@ -1266,10 +1268,7 @@
         }
 
         // Schedule functions
-        const WORK_HOURS = [
-            "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
-            "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
-        ];
+        let WORK_HOURS = []; // Loaded from config
 
         function changeScheduleDate(days) {
             const dateInput = document.getElementById('scheduleDate');
@@ -1326,6 +1325,7 @@
                             <div class="slot-time">${time}</div>
                             <div class="slot-client">${escapeHtml(appt.clientName)}</div>
                             <div class="slot-service">${escapeHtml(appt.service)}</div>
+                            <div class="slot-phone" style="color:#E8A0BF;">${appt.stylist ? "👩 " + escapeHtml(appt.stylist) : ""}</div>
                             <div class="slot-phone">${escapeHtml(appt.clientPhone)}</div>
                             <div class="slot-status">${statusBadge}</div>
                         `;
@@ -1378,7 +1378,7 @@
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td data-label="Ранг" style="font-weight:bold; color: #d4af37;">${rankIcon}</td>
+                        <td data-label="Ранг" style="font-weight:bold; color: #E8A0BF;">${rankIcon}</td>
                         <td data-label="Име">
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span class="client-name">${escapeHtml(client.name)}</span>
@@ -1781,13 +1781,13 @@
                         datasets: [{
                             label: 'Резервации',
                             data: data.values,
-                            borderColor: '#d4af37',
+                            borderColor: '#E8A0BF',
                             backgroundColor: 'rgba(212, 175, 55, 0.08)',
                             tension: 0.4,
                             fill: true,
                             borderWidth: 2,
-                            pointBackgroundColor: '#d4af37',
-                            pointBorderColor: '#d4af37',
+                            pointBackgroundColor: '#E8A0BF',
+                            pointBorderColor: '#E8A0BF',
                             pointRadius: 4,
                             pointHoverRadius: 6
                         }]

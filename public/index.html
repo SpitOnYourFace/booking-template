@@ -6,9 +6,6 @@
     <title>Forever Young — Салон за красота Банско</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💅</text></svg>">
     <meta name="description" content="Фризьорски услуги, козметика, масажи, маникюр и педикюр в Банско. Forever Young — запазете час онлайн!">
-    <meta name="keywords" content="салон за красота, Банско, фризьор, маникюр, педикюр, козметика, масаж">
-    <meta property="og:title" content="Forever Young — Салон за красота Банско">
-    <meta property="og:description" content="Вашият оазис за красота и релакс в Банско. Запазете час онлайн!">
     <meta name="theme-color" content="#E8A0BF">
     <link rel="stylesheet" href="style.css">
     <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
@@ -20,67 +17,32 @@
 </head>
 <body>
 
-    <!-- Navigation -->
     <header data-aos="fade-down">
         <div class="logo">FOREVER YOUNG</div>
-        <div class="mobile-menu-btn" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i>
-        </div>
-        <nav>
-            <ul id="navLinks">
-                <li><a href="#home" onclick="closeMobileMenu()">Начало</a></li>
-                <li><a href="#team" onclick="closeMobileMenu()">Екип</a></li>
-                <li><a href="#services" onclick="closeMobileMenu()">Услуги</a></li>
-                <li><a href="#info" onclick="closeMobileMenu()">Контакти</a></li>
-            </ul>
-        </nav>
+        <div class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></div>
+        <nav><ul id="navLinks">
+            <li><a href="#home" onclick="closeMobileMenu()">Начало</a></li>
+            <li><a href="#team" onclick="closeMobileMenu()">Екип</a></li>
+            <li><a href="#services" onclick="closeMobileMenu()">Услуги</a></li>
+            <li><a href="#info" onclick="closeMobileMenu()">Контакти</a></li>
+        </ul></nav>
     </header>
 
     <!-- Hero -->
-    <section id="home" class="hero" style="background: linear-gradient(rgba(26,18,24,0.7), rgba(26,18,24,0.85)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;">
+    <section id="home" class="hero" style="background: linear-gradient(rgba(26,18,24,0.65), rgba(26,18,24,0.85)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;">
         <h1 data-aos="zoom-in">Красотата е <span>вечна</span></h1>
         <p data-aos="fade-up" data-aos-delay="200">Фризьорски услуги · Козметика · Масажи · Маникюр & Педикюр<br>5 професионалисти, едно място за красота в Банско</p>
         <a href="#services" class="btn" data-aos="fade-up" data-aos-delay="400">Запази Час</a>
     </section>
 
-    <!-- Team Section -->
+    <!-- Team -->
     <section id="team" class="team-section">
         <div class="services-header" data-aos="fade-up">
             <span class="section-label"><i class="fas fa-heart"></i> Нашият екип</span>
             <h2 class="section-title">5 професионалисти, една мисия</h2>
-            <div class="title-decoration">
-                <span class="line"></span>
-                <span class="scissors">✿</span>
-                <span class="line"></span>
-            </div>
+            <div class="title-decoration"><span class="line"></span><span class="scissors">✿</span><span class="line"></span></div>
         </div>
-        <div class="team-grid">
-            <div class="team-card" data-aos="fade-up" data-aos-delay="0">
-                <div class="team-avatar">💇‍♀️</div>
-                <h4>Стилист 1</h4>
-                <p>Фризьорски услуги</p>
-            </div>
-            <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="team-avatar">💆‍♀️</div>
-                <h4>Стилист 2</h4>
-                <p>Козметика & Терапии</p>
-            </div>
-            <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="team-avatar">💅</div>
-                <h4>Стилист 3</h4>
-                <p>Маникюр & Педикюр</p>
-            </div>
-            <div class="team-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="team-avatar">💆</div>
-                <h4>Стилист 4</h4>
-                <p>Масажи & Уелнес</p>
-            </div>
-            <div class="team-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="team-avatar">✨</div>
-                <h4>Стилист 5</h4>
-                <p>Грим & Стайлинг</p>
-            </div>
-        </div>
+        <div class="team-grid" id="teamGrid"></div>
     </section>
 
     <!-- Services -->
@@ -88,69 +50,9 @@
         <div class="services-header" data-aos="fade-up">
             <span class="section-label"><i class="fas fa-spa"></i> Какво предлагаме</span>
             <h2 class="section-title">Нашите Услуги</h2>
-            <div class="title-decoration">
-                <span class="line"></span>
-                <span class="scissors">✿</span>
-                <span class="line"></span>
-            </div>
+            <div class="title-decoration"><span class="line"></span><span class="scissors">✿</span><span class="line"></span></div>
         </div>
-        <div class="service-grid">
-            <div class="service-card" data-aos="fade-up" onclick="selectService('Подстригване', 25)">
-                <div class="service-icon"><i class="fas fa-cut"></i></div>
-                <h3>Подстригване</h3>
-                <p>Дамско подстригване с измиване и оформяне.</p>
-                <div class="service-footer">
-                    <span class="price">25 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100" onclick="selectService('Боядисване', 50)">
-                <div class="service-icon"><i class="fas fa-palette"></i></div>
-                <h3>Боядисване</h3>
-                <p>Пълно боядисване с професионални бои.</p>
-                <div class="service-footer">
-                    <span class="price">50 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="200" onclick="selectService('Маникюр', 35)">
-                <div class="service-icon"><i class="fas fa-hand-sparkles"></i></div>
-                <h3>Маникюр</h3>
-                <p>Класически или гел маникюр с дълготраен ефект.</p>
-                <div class="service-footer">
-                    <span class="price">35 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="300" onclick="selectService('Педикюр', 40)">
-                <div class="service-icon"><i class="fas fa-shoe-prints"></i></div>
-                <h3>Педикюр</h3>
-                <p>Педикюр с грижа за стъпалата и лакиране.</p>
-                <div class="service-footer">
-                    <span class="price">40 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card featured" data-aos="fade-up" data-aos-delay="400" onclick="selectService('Терапия за лице', 45)">
-                <div class="featured-badge"><i class="fas fa-star"></i> Хит</div>
-                <div class="service-icon"><i class="fas fa-spa"></i></div>
-                <h3>Терапия за лице</h3>
-                <p>Дълбоко почистване и хидратация за сияйна кожа.</p>
-                <div class="service-footer">
-                    <span class="price">45 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-            <div class="service-card" data-aos="fade-up" data-aos-delay="500" onclick="selectService('Масаж', 50)">
-                <div class="service-icon"><i class="fas fa-hands"></i></div>
-                <h3>Масаж</h3>
-                <p>Релаксиращ масаж — 60 минути чист блаженство.</p>
-                <div class="service-footer">
-                    <span class="price">50 лв.</span>
-                    <button class="book-btn">Запази</button>
-                </div>
-            </div>
-        </div>
+        <div class="service-grid" id="serviceGrid"></div>
     </section>
 
     <!-- Booking Modal -->
@@ -159,28 +61,35 @@
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Запази час</h2>
             <p id="serviceTitle">Избрана услуга: <span id="selectedService"></span></p>
-            <div class="booking-container">
+
+            <!-- Step 1: Stylist Selection -->
+            <div id="stylistStep">
+                <label style="font-size:14px;font-weight:500;display:block;margin-bottom:10px;">Изберете специалист:</label>
+                <div id="stylistGrid" class="stylist-grid"></div>
+            </div>
+
+            <!-- Step 2: Date & Time -->
+            <div id="dateTimeStep" style="display:none;">
+                <div class="step-back" onclick="backToStylist()"><i class="fas fa-arrow-left"></i> <span id="selectedStylistName">Назад</span></div>
                 <div class="form-group">
                     <label>Избери Дата:</label>
                     <div id="dateScroller" class="date-scroller"></div>
                     <input type="hidden" id="datePicker">
                 </div>
-                <div id="slotsGrid" class="slots-grid">
-                    <p class="placeholder-text">Избери дата отгоре.</p>
-                </div>
+                <div id="slotsGrid" class="slots-grid"><p class="placeholder-text">Избери дата отгоре.</p></div>
                 <div id="clientDetails" style="display:none;">
                     <input type="text" id="clientName" placeholder="Вашето Име" required>
-                    <input type="tel" id="clientPhone" placeholder="Телефон" required>
-                    <small id="phoneError" style="color: #e87777; display: none; margin-bottom: 10px;">Невалиден телефон (напр. 0888123456)</small>
-                    <div id="blockedMessage" style="display: none; background: rgba(232,119,119,0.1); border: 1px solid rgba(232,119,119,0.3); border-radius: 12px; padding: 15px; margin-bottom: 15px; text-align: center;">
-                        <div style="font-size: 28px; margin-bottom: 8px;">🚫</div>
-                        <p style="color: #e87777; font-weight: 600; margin: 0;">Не можете да запазите час</p>
+                    <input type="tel" id="clientPhone" placeholder="Телефон (0888123456)" required>
+                    <small id="phoneError" style="color:#e87777;display:none;margin-bottom:10px;">Невалиден телефон</small>
+                    <div id="blockedMessage" style="display:none;background:rgba(232,119,119,0.1);border:1px solid rgba(232,119,119,0.3);border-radius:12px;padding:15px;margin-bottom:15px;text-align:center;">
+                        <div style="font-size:28px;margin-bottom:8px;">🚫</div>
+                        <p style="color:#e87777;font-weight:600;margin:0;">Не можете да запазите час</p>
                     </div>
                     <input type="email" id="clientEmail" placeholder="Email (незадължително)">
-                    <small style="color: var(--text-muted); display: block; margin-bottom: 15px; font-size: 12px;">За потвърждение и напомняне</small>
-                    <button class="btn" id="submitBtn" onclick="submitBooking()">
+                    <small style="color:var(--text-muted);display:block;margin-bottom:15px;font-size:12px;">За потвърждение и напомняне</small>
+                    <button class="btn" id="submitBtn" onclick="submitBooking()" style="width:100%;">
                         <span class="btn-text">Изпрати заявка</span>
-                        <span class="btn-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Изпращане...</span>
+                        <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Изпращане...</span>
                     </button>
                 </div>
             </div>
@@ -194,29 +103,19 @@
                 <div class="status-icon pending-pulse">⏳</div>
                 <h2>Заявката е изпратена!</h2>
                 <p>Очакваме потвърждение...</p>
-                <div class="confirmation-box">
-                    <p>Вашият код:</p>
-                    <div class="confirmation-code" id="confirmationCode">-</div>
-                </div>
-                <div class="auto-refresh-note">
-                    <div class="spinner"></div>
-                    <span>Проверяваме статуса автоматично...</span>
-                </div>
-                <p class="success-note">Можете да затворите тази страница.</p>
+                <div class="confirmation-box"><p>Вашият код:</p><div class="confirmation-code" id="confirmationCode">-</div></div>
+                <div class="auto-refresh-note"><div class="spinner"></div><span>Проверяваме статуса...</span></div>
                 <button class="btn btn-secondary" onclick="closeSuccess()">Затвори</button>
             </div>
-            <div id="statusConfirmed" style="display: none;">
+            <div id="statusConfirmed" style="display:none;">
                 <div class="status-icon confirmed-bounce">✅</div>
                 <h2>Часът е ПОТВЪРДЕН!</h2>
                 <div class="booking-details" id="bookingDetails"></div>
-                <div class="confirmation-box success-box">
-                    <p>Код за резервация:</p>
-                    <div class="confirmation-code" id="confirmationCodeConfirmed">-</div>
-                </div>
+                <div class="confirmation-box success-box"><p>Код:</p><div class="confirmation-code" id="confirmationCodeConfirmed">-</div></div>
                 <p class="success-note">Очакваме ви! 💕</p>
                 <button class="btn" onclick="closeSuccess()">Страхотно!</button>
             </div>
-            <div id="statusRejected" style="display: none;">
+            <div id="statusRejected" style="display:none;">
                 <div class="status-icon">❌</div>
                 <h2>Часът е отказан</h2>
                 <p>Моля, изберете друг час или се свържете с нас.</p>
@@ -226,42 +125,27 @@
         </div>
     </div>
 
-    
     <!-- Gallery -->
     <div class="gallery-strip" data-aos="fade-up">
-        <img class="gallery-img" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Маникюр">
-        <img class="gallery-img" src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Фризьорски услуги">
-        <img class="gallery-img" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Терапия за лице">
-        <img class="gallery-img" src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Салон">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Маникюр" loading="lazy">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1519824145371-296894a0daa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Фризьорски услуги" loading="lazy">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Терапия за лице" loading="lazy">
+        <img class="gallery-img" src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=75" alt="Салон" loading="lazy">
     </div>
 
     <!-- Info Section -->
     <section id="info" class="info-section">
         <div class="info-container">
             <div class="info-main" data-aos="fade-right">
-                <div class="info-main-content">
-                    <h2>Намерете ни</h2>
-                    <div class="location-display">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <span class="district-name">Банско</span>
-                            <span class="street-name">ул. „Цар Симеон" 21</span>
-                        </div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">★★★★★</div>
-                        <span>5.0 от 6 отзива</span>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Forever+Young+%D1%81%D0%B0%D0%BB%D0%BE%D0%BD+%D0%B7%D0%B0+%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B0+%D0%91%D0%B0%D0%BD%D1%81%D0%BA%D0%BE" target="_blank" class="directions-btn">
-                        <i class="fas fa-directions"></i> Упътване
-                    </a>
-                </div>
+                <h2>Намерете ни</h2>
+                <div class="location-display"><i class="fas fa-map-marker-alt"></i><div><span class="district-name">Банско</span><span class="street-name">ул. „Цар Симеон" 21</span></div></div>
+                <div class="rating-display"><div class="stars">★★★★★</div><span>5.0 от 6 отзива</span></div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Forever+Young+салон+красота+Банско" target="_blank" class="directions-btn"><i class="fas fa-directions"></i> Упътване</a>
             </div>
             <div class="info-cards" data-aos="fade-left">
                 <div class="info-card">
                     <div class="info-card-icon"><i class="fas fa-clock"></i></div>
-                    <div class="info-card-content">
-                        <h4>Работно време</h4>
+                    <div class="info-card-content"><h4>Работно време</h4>
                         <div class="hours-list">
                             <div class="hour-row"><span>Пон - Пет</span><span class="hour-time">09:00 - 18:30</span></div>
                             <div class="hour-row"><span>Събота</span><span class="hour-time">09:00 - 15:00</span></div>
@@ -271,16 +155,14 @@
                 </div>
                 <div class="info-card">
                     <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="info-card-content">
-                        <h4>Контакти</h4>
+                    <div class="info-card-content"><h4>Контакти</h4>
                         <a href="tel:+359898779073" class="contact-link"><i class="fas fa-phone"></i> 089 877 9073</a>
                         <a href="tel:+359895600582" class="contact-link" style="margin-top:8px"><i class="fas fa-phone"></i> 089 560 0582</a>
                     </div>
                 </div>
                 <div class="info-card">
                     <div class="info-card-icon"><i class="fas fa-share-alt"></i></div>
-                    <div class="info-card-content">
-                        <h4>Социални мрежи</h4>
+                    <div class="info-card-content"><h4>Социални мрежи</h4>
                         <div class="social-links">
                             <a href="https://www.facebook.com/people/Forever-young-%D1%81%D0%B0%D0%BB%D0%BE%D0%BD-%D0%B7%D0%B0-%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B0/100064066777990/" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
                         </div>
@@ -290,83 +172,228 @@
         </div>
     </section>
 
-    <!-- CTA -->
     <section id="contact" class="contact">
         <h2 class="section-title">Готови за промяна?</h2>
         <p>Запазете час и се доверете на нашите професионалисти.</p>
         <a href="tel:+359898779073" class="btn"><i class="fas fa-phone"></i> 089 877 9073</a>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Forever Young — Салон за красота, Банско. Всички права запазени.</p>
-    </footer>
+    <footer><p>&copy; 2026 Forever Young — Салон за красота, Банско</p></footer>
+
+    <!-- Floating Book Button -->
+    <a href="#services" class="floating-book-btn" id="floatingBtn"><i class="fas fa-calendar-plus"></i></a>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof AOS !== 'undefined') AOS.init({ duration: 800, once: true });
-            else { const w = setInterval(() => { if (typeof AOS !== 'undefined') { clearInterval(w); AOS.init({ duration: 800, once: true }); } }, 50); setTimeout(() => clearInterval(w), 5000); }
-        });
+    document.addEventListener('DOMContentLoaded', () => {
+        if(typeof AOS!=='undefined') AOS.init({duration:800,once:true});
+        else{const w=setInterval(()=>{if(typeof AOS!=='undefined'){clearInterval(w);AOS.init({duration:800,once:true});}},50);setTimeout(()=>clearInterval(w),5000);}
+        loadConfig();
+    });
 
-        const SERVICE_PRICES = { 'Подстригване': 25, 'Боядисване': 50, 'Маникюр': 35, 'Педикюр': 40, 'Терапия за лице': 45, 'Масаж': 50 };
+    let CONFIG = null, STYLISTS_DATA = [];
+    let currentService='', currentPrice=0, selectedTime=null, selectedStylist=null;
 
-        function showToast(msg, type='success') { const t=document.createElement('div'); t.className=`toast toast-${type}`; t.innerText=msg; document.body.appendChild(t); setTimeout(()=>t.classList.add('show'),100); setTimeout(()=>{t.classList.remove('show');setTimeout(()=>document.body.removeChild(t),300);},3000); }
-        function toggleMobileMenu() { document.getElementById('navLinks').classList.toggle('active'); }
-        function closeMobileMenu() { document.getElementById('navLinks').classList.remove('active'); }
+    async function loadConfig() {
+        try {
+            const res = await fetch('/api/config');
+            CONFIG = await res.json();
+            STYLISTS_DATA = CONFIG.stylists || [];
+            renderTeam();
+            renderServices();
+        } catch(e) { console.error('Config load failed'); }
+    }
 
-        const modal = document.getElementById("bookingModal");
-        let currentService="", currentPrice=0, selectedTime=null;
+    function renderTeam() {
+        const grid = document.getElementById('teamGrid');
+        grid.innerHTML = STYLISTS_DATA.map((s, i) => `
+            <div class="team-card" data-aos="fade-up" data-aos-delay="${i*100}">
+                <div class="team-avatar">${s.emoji}</div>
+                <h4>${s.name}</h4>
+                <p>${s.role}</p>
+            </div>
+        `).join('');
+    }
 
-        function selectService(name,price) { currentService=name; currentPrice=price; document.getElementById("selectedService").innerText=name+" ("+price+" лв.)"; modal.style.display="block"; document.getElementById("datePicker").value=new Date().toISOString().split('T')[0]; generateDates(); }
+    function renderServices() {
+        if (!CONFIG) return;
+        const grid = document.getElementById('serviceGrid');
+        grid.innerHTML = CONFIG.services.map((s, i) => `
+            <div class="service-card ${s.featured?'featured':''}" data-aos="fade-up" data-aos-delay="${i*100}" onclick="selectService('${s.name}', ${s.price})">
+                ${s.featured ? '<div class="featured-badge"><i class="fas fa-star"></i> Хит</div>' : ''}
+                <div class="service-icon"><i class="${s.icon}"></i></div>
+                <h3>${s.name}</h3>
+                <p>${s.description}</p>
+                <div class="service-footer">
+                    <span class="price">${s.price} лв.</span>
+                    <button class="book-btn">Запази</button>
+                </div>
+            </div>
+        `).join('');
+    }
 
-        function generateDates() {
-            const s=document.getElementById("dateScroller"); s.innerHTML="";
-            const days=['Нед','Пон','Вто','Сря','Чет','Пет','Съб'], months=['Яну','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек'];
-            for(let i=0;i<14;i++){const d=new Date();d.setDate(d.getDate()+i);const iso=d.toISOString().split('T')[0];const dn=i===0?"Днес":i===1?"Утре":days[d.getDay()];const c=document.createElement("div");c.className="date-card";if(i===0)c.classList.add("active");c.onclick=()=>selectDate(c,iso);c.innerHTML=`<span class="day-name">${dn}</span><span class="day-number">${d.getDate()}</span><span class="month-name">${months[d.getMonth()]}</span>`;s.appendChild(c);if(i===0){document.getElementById("datePicker").value=iso;loadSlots();}}
+    function showToast(msg,type='success'){const t=document.createElement('div');t.className=`toast toast-${type}`;t.innerText=msg;document.body.appendChild(t);setTimeout(()=>t.classList.add('show'),100);setTimeout(()=>{t.classList.remove('show');setTimeout(()=>document.body.removeChild(t),300);},3000);}
+    function toggleMobileMenu(){document.getElementById('navLinks').classList.toggle('active');}
+    function closeMobileMenu(){document.getElementById('navLinks').classList.remove('active');}
+
+    const modal = document.getElementById("bookingModal");
+
+    function selectService(name, price) {
+        currentService = name; currentPrice = price; selectedStylist = null; selectedTime = null;
+        document.getElementById("selectedService").innerText = name + " (" + price + " лв.)";
+
+        // Show stylist selection
+        const grid = document.getElementById("stylistGrid");
+        const relevantStylists = STYLISTS_DATA.filter(s => s.services.includes(name));
+
+        if (relevantStylists.length === 0) {
+            // No stylists configured — skip step
+            selectedStylist = null;
+            document.getElementById("stylistStep").style.display = "none";
+            document.getElementById("dateTimeStep").style.display = "block";
+            modal.style.display = "block";
+            generateDates();
+            return;
         }
 
-        function selectDate(el,date){document.querySelectorAll(".date-card").forEach(c=>c.classList.remove("active"));el.classList.add("active");document.getElementById("datePicker").value=date;loadSlots();}
-        function closeModal(){modal.style.display="none";document.getElementById("clientDetails").style.display="none";document.getElementById("clientName").value="";document.getElementById("clientPhone").value="";document.getElementById("clientEmail").value="";document.getElementById("blockedMessage").style.display="none";document.getElementById("submitBtn").style.display="";selectedTime=null;}
+        grid.innerHTML = relevantStylists.map(s => `
+            <div class="stylist-option" onclick="chooseStylist('${s.name}', '${s.emoji}')">
+                <div class="stylist-emoji">${s.emoji}</div>
+                <div class="stylist-name">${s.name}</div>
+                <div class="stylist-role">${s.role}</div>
+            </div>
+        `).join('') + `
+            <div class="stylist-option any-stylist" onclick="chooseStylist(null, '🎲')">
+                <div class="stylist-emoji">🎲</div>
+                <div class="stylist-name">Без значение</div>
+                <div class="stylist-role">Първи свободен</div>
+            </div>
+        `;
 
-        let statusCheckTimeout=null,currentBookingCode=null,pollCount=0;
-        const POLL_INTERVALS=[3,5,5,10,10,15,15,30];
+        document.getElementById("stylistStep").style.display = "block";
+        document.getElementById("dateTimeStep").style.display = "none";
+        modal.style.display = "block";
+    }
 
-        function closeSuccess(){document.getElementById("successModal").style.display="none";if(statusCheckTimeout)clearTimeout(statusCheckTimeout);pollCount=0;document.getElementById("statusPending").style.display="block";document.getElementById("statusConfirmed").style.display="none";document.getElementById("statusRejected").style.display="none";}
-        function showBookingStatus(code){currentBookingCode=code;document.getElementById("confirmationCode").innerText=code;document.getElementById("successModal").style.display="block";pollCount=0;checkStatus(code);}
-        function scheduleNextPoll(code){const interval=POLL_INTERVALS[Math.min(pollCount,POLL_INTERVALS.length-1)]*1000;pollCount++;statusCheckTimeout=setTimeout(()=>checkStatus(code),interval);}
+    function chooseStylist(name, emoji) {
+        selectedStylist = name;
+        document.getElementById("selectedStylistName").textContent = name ? (emoji + ' ' + name) : '🎲 Без значение';
+        document.getElementById("stylistStep").style.display = "none";
+        document.getElementById("dateTimeStep").style.display = "block";
+        generateDates();
+    }
 
-        async function checkStatus(code){
-            try{const res=await fetch(`/api/status/${code}?t=${Date.now()}`,{cache:'no-store'});if(!res.ok){scheduleNextPoll(code);return;}const data=await res.json();
-            if(data.status==='confirmed'){document.getElementById("statusPending").style.display="none";document.getElementById("statusConfirmed").style.display="block";document.getElementById("confirmationCodeConfirmed").innerText=code;document.getElementById("bookingDetails").innerHTML=`<div class="detail-row"><span class="label">📅 Дата</span><span class="value">${formatDateBg(data.date)}</span></div><div class="detail-row"><span class="label">⏰ Час</span><span class="value">${data.time}</span></div><div class="detail-row"><span class="label">💆 Услуга</span><span class="value">${data.service}</span></div>`;}
-            else if(data.status==='rejected'){document.getElementById("statusPending").style.display="none";document.getElementById("statusRejected").style.display="block";}
-            else{scheduleNextPoll(code);}}catch(e){scheduleNextPoll(code);}
+    function backToStylist() {
+        document.getElementById("dateTimeStep").style.display = "none";
+        document.getElementById("stylistStep").style.display = "block";
+        document.getElementById("clientDetails").style.display = "none";
+        selectedTime = null;
+    }
+
+    function generateDates() {
+        const s=document.getElementById("dateScroller"); s.innerHTML="";
+        const days=['Нед','Пон','Вто','Сря','Чет','Пет','Съб'], months=['Яну','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек'];
+        for(let i=0;i<14;i++){const d=new Date();d.setDate(d.getDate()+i);const iso=d.toISOString().split('T')[0];const dn=i===0?"Днес":i===1?"Утре":days[d.getDay()];
+            // Skip Sunday
+            if(d.getDay()===0) continue;
+            const c=document.createElement("div");c.className="date-card";
+            if(document.getElementById("datePicker").value==='' && i===0) { c.classList.add("active"); document.getElementById("datePicker").value=iso; loadSlots(); }
+            c.onclick=()=>selectDate(c,iso);c.innerHTML=`<span class="day-name">${dn}</span><span class="day-number">${d.getDate()}</span><span class="month-name">${months[d.getMonth()]}</span>`;s.appendChild(c);
         }
+        if (!document.getElementById("datePicker").value) {
+            // If today is Sunday, pick first available
+            const first = s.querySelector('.date-card');
+            if (first) first.click();
+        }
+    }
 
-        function formatDateBg(ds){const d=new Date(ds);const days=['Неделя','Понеделник','Вторник','Сряда','Четвъртък','Петък','Събота'];const months=['януари','февруари','март','април','май','юни','юли','август','септември','октомври','ноември','декември'];return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]}`;}
+    function selectDate(el,date){document.querySelectorAll(".date-card").forEach(c=>c.classList.remove("active"));el.classList.add("active");document.getElementById("datePicker").value=date;loadSlots();}
 
-        async function loadSlots(){
-            const date=document.getElementById("datePicker").value;if(!date)return;const grid=document.getElementById("slotsGrid");grid.innerHTML="<p>Зареждане...</p>";
-            try{const res=await fetch(`/api/slots?date=${date}`);const slots=await res.json();grid.innerHTML="";const today=new Date();const isToday=date===today.toISOString().split('T')[0];const ch=today.getHours(),cm=today.getMinutes();
+    function closeModal(){modal.style.display="none";document.getElementById("clientDetails").style.display="none";document.getElementById("clientName").value="";document.getElementById("clientPhone").value="";document.getElementById("clientEmail").value="";document.getElementById("blockedMessage").style.display="none";document.getElementById("submitBtn").style.display="";document.getElementById("stylistStep").style.display="block";document.getElementById("dateTimeStep").style.display="none";document.getElementById("datePicker").value="";selectedTime=null;selectedStylist=null;}
+
+    let statusCheckTimeout=null,currentBookingCode=null,pollCount=0;
+    const POLL_INTERVALS=[3,5,5,10,10,15,15,30];
+
+    function closeSuccess(){document.getElementById("successModal").style.display="none";if(statusCheckTimeout)clearTimeout(statusCheckTimeout);pollCount=0;document.getElementById("statusPending").style.display="block";document.getElementById("statusConfirmed").style.display="none";document.getElementById("statusRejected").style.display="none";}
+    function showBookingStatus(code){currentBookingCode=code;document.getElementById("confirmationCode").innerText=code;document.getElementById("successModal").style.display="block";pollCount=0;checkStatus(code);}
+    function scheduleNextPoll(code){const interval=POLL_INTERVALS[Math.min(pollCount,POLL_INTERVALS.length-1)]*1000;pollCount++;statusCheckTimeout=setTimeout(()=>checkStatus(code),interval);}
+
+    async function checkStatus(code){
+        try{const res=await fetch(`/api/status/${code}?t=${Date.now()}`,{cache:'no-store'});if(!res.ok){scheduleNextPoll(code);return;}const data=await res.json();
+        if(data.status==='confirmed'){
+            document.getElementById("statusPending").style.display="none";document.getElementById("statusConfirmed").style.display="block";
+            document.getElementById("confirmationCodeConfirmed").innerText=code;
+            let details=`<div class="detail-row"><span class="label">📅 Дата</span><span class="value">${formatDateBg(data.date)}</span></div><div class="detail-row"><span class="label">⏰ Час</span><span class="value">${data.time}</span></div><div class="detail-row"><span class="label">💆 Услуга</span><span class="value">${data.service}</span></div>`;
+            if(data.stylist) details+=`<div class="detail-row"><span class="label">👩 Специалист</span><span class="value">${data.stylist}</span></div>`;
+            document.getElementById("bookingDetails").innerHTML=details;
+        } else if(data.status==='rejected'){document.getElementById("statusPending").style.display="none";document.getElementById("statusRejected").style.display="block";}
+        else{scheduleNextPoll(code);}}catch(e){scheduleNextPoll(code);}
+    }
+
+    function formatDateBg(ds){const d=new Date(ds);const days=['Неделя','Понеделник','Вторник','Сряда','Четвъртък','Петък','Събота'];const months=['януари','февруари','март','април','май','юни','юли','август','септември','октомври','ноември','декември'];return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]}`;}
+
+    async function loadSlots(){
+        const date=document.getElementById("datePicker").value;if(!date)return;const grid=document.getElementById("slotsGrid");grid.innerHTML="<p>Зареждане...</p>";
+        try{
+            let url = `/api/slots?date=${date}`;
+            if (selectedStylist) url += `&stylist=${encodeURIComponent(selectedStylist)}`;
+            const res=await fetch(url);const slots=await res.json();grid.innerHTML="";
+            const today=new Date();const isToday=date===today.toISOString().split('T')[0];const ch=today.getHours(),cm=today.getMinutes();
             const avail=slots.filter(s=>{if(!isToday)return true;const[h,m]=s.time.split(':').map(Number);return h>ch||(h===ch&&m>cm);});
-            if(!avail.length){grid.innerHTML="<p>Няма свободни часове за тази дата.</p>";return;}
-            avail.forEach(slot=>{const div=document.createElement("div");if(slot.status==='free'){div.className="time-slot free";div.innerText=slot.time;div.onclick=()=>selectTime(div,slot.time);}else{div.className="time-slot taken";div.innerText=slot.time;}grid.appendChild(div);});}catch(e){grid.innerHTML="<p>Грешка при връзка със сървъра.</p>";}
-        }
+            if(!avail.length){grid.innerHTML="<p class='placeholder-text'>Няма свободни часове за тази дата.</p>";return;}
+            avail.forEach(slot=>{const div=document.createElement("div");
+                if(slot.status==='free'){div.className="time-slot free";div.innerText=slot.time;if(!selectedStylist&&slot.available)div.title=slot.available+' свободни специалисти';div.onclick=()=>selectTime(div,slot.time);}
+                else{div.className="time-slot taken";div.innerText=slot.time;}
+                grid.appendChild(div);});
+        }catch(e){grid.innerHTML="<p class='placeholder-text'>Грешка при връзка.</p>";}
+    }
 
-        function selectTime(el,time){document.querySelectorAll('.time-slot.selected').forEach(d=>d.classList.remove('selected'));el.classList.add('selected');selectedTime=time;document.getElementById("clientDetails").style.display="block";}
-        function validateInput(id,regex){const el=document.getElementById(id);const valid=regex?regex.test(el.value):el.value.trim().length>0;el.style.borderColor=valid?"rgba(232,160,191,0.15)":"#e87777";if(id==="clientPhone")document.getElementById("phoneError").style.display=valid?"none":"block";return valid;}
+    function selectTime(el,time){document.querySelectorAll('.time-slot.selected').forEach(d=>d.classList.remove('selected'));el.classList.add('selected');selectedTime=time;document.getElementById("clientDetails").style.display="block";}
 
-        async function submitBooking(){
-            const nv=validateInput("clientName"),pv=validateInput("clientPhone",/^(\+359|0)8[7-9][0-9]{7}$/);if(!nv||!pv||!selectedTime){if(!selectedTime)alert("Моля изберете час!");return;}
-            const btn=document.getElementById('submitBtn');btn.disabled=true;btn.querySelector('.btn-text').style.display='none';btn.querySelector('.btn-loading').style.display='inline';
-            try{const res=await fetch('/api/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({date:document.getElementById("datePicker").value,time:selectedTime,service:currentService,price:SERVICE_PRICES[currentService]||currentPrice,clientName:document.getElementById("clientName").value,clientPhone:document.getElementById("clientPhone").value,clientEmail:document.getElementById("clientEmail").value.trim()||null})});
-            const data=await res.json();if(res.ok){closeModal();showBookingStatus(data.confirmationCode);}else if(data.error==='blocked'){document.getElementById('blockedMessage').style.display='block';document.getElementById('submitBtn').style.display='none';}else{alert("Грешка: "+(data.error||"Възникна проблем."));loadSlots();}}catch(e){alert("Сървърна грешка");}
-            btn.disabled=false;btn.querySelector('.btn-text').style.display='inline';btn.querySelector('.btn-loading').style.display='none';
-        }
+    async function submitBooking(){
+        const nv=document.getElementById("clientName").value.trim().length>0;
+        const pv=/^(\+359|0)8[7-9][0-9]{7}$/.test(document.getElementById("clientPhone").value.replace(/[^0-9+]/g,''));
+        document.getElementById("clientName").style.borderColor=nv?"rgba(232,160,191,0.15)":"#e87777";
+        document.getElementById("clientPhone").style.borderColor=pv?"rgba(232,160,191,0.15)":"#e87777";
+        document.getElementById("phoneError").style.display=pv?"none":"block";
+        if(!nv||!pv||!selectedTime){if(!selectedTime)showToast("Изберете час!","error");return;}
 
-        window.onclick=function(e){if(e.target==modal)closeModal();};
-        const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('nav a');
-        function highlightNav(){const sy=window.scrollY;sections.forEach(s=>{const t=s.offsetTop-100,h=s.offsetHeight,id=s.getAttribute('id');if(sy>=t&&sy<t+h)navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+id)l.classList.add('active');});});}
-        window.addEventListener('scroll',highlightNav);highlightNav();
+        const btn=document.getElementById('submitBtn');btn.disabled=true;btn.querySelector('.btn-text').style.display='none';btn.querySelector('.btn-loading').style.display='inline';
+
+        try{
+            const body = {
+                date:document.getElementById("datePicker").value,
+                time:selectedTime,
+                service:currentService,
+                price:currentPrice,
+                clientName:document.getElementById("clientName").value,
+                clientPhone:document.getElementById("clientPhone").value,
+                clientEmail:document.getElementById("clientEmail").value.trim()||null
+            };
+            if (selectedStylist) body.stylist = selectedStylist;
+
+            const res=await fetch('/api/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+            const data=await res.json();
+            if(res.ok){closeModal();showBookingStatus(data.confirmationCode);}
+            else if(data.error==='blocked'){document.getElementById('blockedMessage').style.display='block';document.getElementById('submitBtn').style.display='none';}
+            else if(data.error==='Slot taken'){showToast("Този час вече е зает!","error");loadSlots();}
+            else{showToast("Грешка: "+(data.error||"Проблем"),"error");}
+        }catch(e){showToast("Сървърна грешка","error");}
+        btn.disabled=false;btn.querySelector('.btn-text').style.display='inline';btn.querySelector('.btn-loading').style.display='none';
+    }
+
+    window.onclick=function(e){if(e.target==modal)closeModal();};
+
+    // Nav highlight
+    const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('nav a');
+    function highlightNav(){const sy=window.scrollY;sections.forEach(s=>{const t=s.offsetTop-100,h=s.offsetHeight,id=s.getAttribute('id');if(sy>=t&&sy<t+h)navLinks.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+id)l.classList.add('active');});});}
+    window.addEventListener('scroll',()=>{
+        highlightNav();
+        // Show/hide floating button
+        const fb=document.getElementById('floatingBtn');
+        if(fb) fb.style.opacity = window.scrollY > 400 ? '1' : '0';
+    });
+    highlightNav();
     </script>
 </body>
 </html>
