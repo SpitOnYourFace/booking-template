@@ -292,7 +292,7 @@
 
     function generateDates() {
         const s=document.getElementById("dateScroller"); s.innerHTML="";
-        const days=['Нед','Пон','Вто','Сря','Чет','Пет','Съб'], months=['Яну','Фев','Мар','Апр','Май','Юни','Юли','Авг','Сеп','Окт','Ное','Дек'];
+        const days=['Нед','Пон','Вто','Сря','Чет','Пет','Съб'], months=['яну','фев','мар','апр','май','юни','юли','авг','сеп','окт','ное','дек'];
         for(let i=0;i<14;i++){const d=new Date();d.setDate(d.getDate()+i);const iso=d.toISOString().split('T')[0];const dn=i===0?"Днес":i===1?"Утре":days[d.getDay()];
             // Skip Sunday
             if(d.getDay()===0) continue;

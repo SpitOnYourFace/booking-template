@@ -55,7 +55,8 @@ app.use(express.static(path.join(__dirname, 'public'), {
     setHeaders: (res, fp) => { res.setHeader('Cache-Control', fp.match(/\.(svg|png|jpg)$/) ? 'public, max-age=3600, must-revalidate' : 'no-cache, must-revalidate'); }
 }));
 
-const db = new sqlite3.Database('./appointments.db', (err) => { if (err) console.error(err.message); else console.log('Connected to SQLite'); });
+const DB_PATH = process.env.NODE_ENV === 'production' ? '/tmp/appointments.db' : './appointments.db';
+const db = new sqlite3.Database(DB_PATH, (err) => { if (err) console.error(err.message); else console.log('Connected to SQLite'); });
 
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS appointments (
