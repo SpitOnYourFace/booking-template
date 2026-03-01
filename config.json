@@ -1,104 +1,121 @@
 {
-  "_comment": "Конфигурация на бизнеса. Промени този файл за нов клиент — целият сайт се адаптира автоматично.",
+  "_comment": "Forever Young — Салон за красота, Банско",
 
   "business": {
-    "name": "Elite Barber Studio",
-    "shortName": "ELITE BARBER",
-    "tagline": "Стилът започва тук",
-    "description": "Модерно подстригване и класическо бръснене в сърцето на града.",
-    "phone": "+359879691194",
-    "phoneDisplay": "087 969 1194",
-    "email": "info@elitebarber.bg",
+    "name": "Forever Young",
+    "shortName": "FOREVER YOUNG",
+    "tagline": "Вашият оазис за красота и релакс",
+    "description": "Фризьорски услуги, козметика, масажи, маникюр и педикюр в сърцето на Банско. 5 професионалисти, едно място за красота.",
+    "phone": "+359898779073",
+    "phoneDisplay": "089 877 9073",
+    "phoneSecondary": "+359895600582",
+    "phoneSecondaryDisplay": "089 560 0582",
+    "email": "",
     "address": {
-      "street": "бул. Витоша 45",
-      "district": "Център",
-      "city": "София",
-      "googleMapsQuery": "бул.+Витоша+45,+София"
+      "street": "ул. Цар Симеон 21",
+      "district": "",
+      "city": "Банско",
+      "googleMapsQuery": "Forever+Young+салон+красота+Банско+ул+Цар+Симеон"
     },
     "social": {
-      "instagram": "https://instagram.com/krasikralev",
-      "facebook": "https://facebook.com/krasikralev",
-      "tiktok": "https://tiktok.com/@krasikralev"
+      "instagram": "",
+      "facebook": "https://www.facebook.com/people/Forever-young-%D1%81%D0%B0%D0%BB%D0%BE%D0%BD-%D0%B7%D0%B0-%D0%BA%D1%80%D0%B0%D1%81%D0%BE%D1%82%D0%B0/100064066777990/",
+      "tiktok": ""
     },
     "rating": {
-      "score": "4.9",
-      "count": 127
+      "score": "5.0",
+      "count": 6
     },
     "year": 2026
   },
 
   "theme": {
-    "primaryColor": "#d4af37",
-    "primaryColorHover": "#b5952f",
-    "bgColor": "#111",
-    "heroImage": "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=75",
-    "logo": "logo.svg",
+    "primaryColor": "#E8A0BF",
+    "primaryColorHover": "#D4789E",
+    "bgColor": "#1a1218",
+    "heroImage": "",
+    "logo": "",
     "fonts": {
-      "heading": "Oswald",
-      "body": "Roboto"
+      "heading": "Playfair Display",
+      "body": "Poppins"
     }
   },
 
   "services": [
     {
-      "name": "Мъжко Подстригване",
-      "price": 13,
-      "description": "Класическо или модерно, с внимание към всеки детайл.",
+      "name": "Подстригване",
+      "price": 25,
+      "description": "Дамско подстригване с измиване и оформяне.",
       "icon": "fas fa-cut",
       "featured": false
     },
     {
-      "name": "Оформяне на Брада",
-      "price": 8,
-      "description": "Прецизно оформяне, контуриране и терапия с топли кърпи.",
-      "icon": "fas fa-user",
+      "name": "Боядисване",
+      "price": 50,
+      "description": "Пълно боядисване с професионални бои.",
+      "icon": "fas fa-palette",
       "featured": false
     },
     {
-      "name": "Пълен Пакет",
-      "price": 18,
-      "description": "Подстригване + Брада + Измиване и стайлинг. VIP третиране.",
-      "icon": "fas fa-crown",
+      "name": "Маникюр",
+      "price": 35,
+      "description": "Класически или гел маникюр с дълготраен ефект.",
+      "icon": "fas fa-hand-sparkles",
+      "featured": false
+    },
+    {
+      "name": "Педикюр",
+      "price": 40,
+      "description": "Педикюр с грижа за стъпалата и лакиране.",
+      "icon": "fas fa-shoe-prints",
+      "featured": false
+    },
+    {
+      "name": "Терапия за лице",
+      "price": 45,
+      "description": "Дълбоко почистване и хидратация за сияйна кожа.",
+      "icon": "fas fa-spa",
       "featured": true
     },
     {
-      "name": "Детско Подстригване",
-      "price": 10,
-      "description": "За малките джентълмени (до 12г). Търпение и усмивки.",
-      "icon": "fas fa-child",
+      "name": "Масаж",
+      "price": 50,
+      "description": "Релаксиращ масаж — 60 минути чист блаженство.",
+      "icon": "fas fa-hands",
       "featured": false
     }
   ],
 
   "workHours": {
     "slots": [
-      "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
-      "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30"
+      "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+      "12:00", "12:30", "13:00", "13:30",
+      "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
+      "17:00", "17:30", "18:00"
     ],
     "display": [
-      { "days": "Пон - Пет", "hours": "10:00 - 19:00" },
-      { "days": "Събота", "hours": "10:00 - 14:00" },
-      { "days": "Неделя", "hours": "Затворено", "closed": true },
-      { "days": "Почивка", "hours": "13:00 - 15:00", "break": true }
+      { "days": "Пон - Пет", "hours": "09:00 - 18:30" },
+      { "days": "Събота", "hours": "09:00 - 15:00" },
+      { "days": "Неделя", "hours": "Затворено", "closed": true }
     ]
   },
 
   "booking": {
-    "confirmationPrefix": "EB",
+    "confirmationPrefix": "FY",
     "daysAhead": 14,
-    "currency": "€",
+    "currency": "лв.",
     "phoneRegex": "^(\\+359|0)8[7-9][0-9]{7}$"
   },
 
   "seo": {
-    "title": "Elite Barber Studio - София | Онлайн Резервации",
-    "description": "Модерно подстригване и класическо бръснене в центъра на София. Elite Barber Studio — запази час онлайн за секунди!",
-    "keywords": "бръснарница, подстригване, София, барбершоп, брада, мъжко подстригване, online booking",
-    "ogUrl": "https://demo-barber.up.railway.app"
+    "title": "Forever Young — Салон за красота Банско | Онлайн Резервации",
+    "description": "Фризьорски услуги, козметика, масажи, маникюр и педикюр в Банско. Forever Young — запазете час онлайн!",
+    "keywords": "салон за красота, Банско, фризьор, маникюр, педикюр, козметика, масаж, онлайн резервация",
+    "ogUrl": "https://booking-template.vercel.app"
   },
 
   "admin": {
-    "title": "Админ Панел",
-    "ownerName": "Админ"
+    "title": "Админ Панел — Forever Young",
+    "ownerName": "Forever Young"
   }
 }

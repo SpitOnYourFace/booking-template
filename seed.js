@@ -6,7 +6,7 @@ const db = new sqlite3.Database(DB_PATH);
 
 function generateCode() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let code = 'HB-';
+    let code = 'FY-';
     for (let i = 0; i < 6; i++) {
         code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
@@ -26,10 +26,10 @@ const WORK_HOURS = [
 ];
 
 const SERVICES = [
-    { name: "Мъжко Подстригване", price: 25 },
-    { name: "Оформяне на Брада", price: 15 },
-    { name: "Пълен Пакет", price: 35 },
-    { name: "Детско Подстригване", price: 20 }
+    { name: "Подстригване", price: 25 },
+    { name: "Маникюр", price: 45 },
+    { name: "Терапия за лице", price: 45 },
+    { name: "Педикюр", price: 40 }
 ];
 
 // Realistic Bulgarian clients
