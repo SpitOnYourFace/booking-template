@@ -1,3 +1,4 @@
 node_modules/
 appointments.db
 .env
+.vercel
